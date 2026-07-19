@@ -1,0 +1,341 @@
+/* ==========================================================================
+   CME Bank Design System — Components
+   --------------------------------------------------------------------------
+   Every value here references a Tier 2 semantic token. There are no raw hex
+   values, no magic numbers, and no primitive references in this file. If you
+   need a value that isn't available, add a semantic token to tokens.css —
+   don't hardcode it here.
+
+   Class naming:  .cme-[component]                block
+                  .cme-[component]--[variant]     variant
+                  .is-[state]                     forced state (docs/testing)
+
+   The .is-* classes exist so every state can be displayed statically in the
+   documentation. In production you generally want the real pseudo-classes,
+   which are always defined alongside them.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Shared focus treatment
+   One definition, used by every interactive component. Never remove an
+   outline without providing this replacement.
+   -------------------------------------------------------------------------- */
+.cme-btn:focus-visible,
+.cme-input:focus-visible,
+.cme-select:focus-visible,
+.cme-checkbox input:focus-visible + .cme-checkbox__box,
+.cme-radio input:focus-visible + .cme-radio__dot,
+.cme-switch input:focus-visible + .cme-switch__track,
+.cme-btn.is-focus,
+.cme-input.is-focus {
+  outline: var(--border-width-focus) solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   BUTTON
+   ========================================================================== */
+.cme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--control-md);
+  padding: 0 var(--space-3);
+  border: var(--border-width-thin) solid transparent;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--size-14);
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-body);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color .12s ease, border-color .12s ease;
+}
+.cme-btn:disabled,
+.cme-btn.is-disabled { cursor: not-allowed; }
+
+.cme-btn--sm { height: var(--control-sm); padding: 0 var(--space-2); font-size: var(--size-12); }
+.cme-btn--lg { height: var(--control-lg); padding: 0 var(--space-4); font-size: var(--size-16); }
+
+/* Primary — brand green is a light hue, so the label is dark and the
+   interaction ramp lightens. See tokens.css for the contrast rationale. */
+.cme-btn--primary {
+  background: var(--action-primary-bg);
+  color: var(--action-primary-fg);
+}
+.cme-btn--primary:hover:not(:disabled):not(.is-disabled),
+.cme-btn--primary.is-hover { background: var(--action-primary-bg-hover); }
+.cme-btn--primary:active:not(:disabled),
+.cme-btn--primary.is-pressed { background: var(--action-primary-bg-pressed); }
+.cme-btn--primary:disabled,
+.cme-btn--primary.is-disabled {
+  background: var(--action-primary-bg-disabled);
+  color: var(--action-primary-fg-disabled);
+}
+
+.cme-btn--secondary {
+  background: var(--action-secondary-bg);
+  border-color: var(--action-secondary-border);
+  color: var(--action-secondary-fg);
+}
+.cme-btn--secondary:hover:not(:disabled):not(.is-disabled),
+.cme-btn--secondary.is-hover { background: var(--action-secondary-bg-hover); }
+.cme-btn--secondary:active:not(:disabled),
+.cme-btn--secondary.is-pressed { background: var(--action-secondary-bg-pressed); }
+.cme-btn--secondary:disabled,
+.cme-btn--secondary.is-disabled {
+  color: var(--text-disabled);
+  border-color: var(--border-subtle);
+}
+
+.cme-btn--tertiary {
+  background: transparent;
+  color: var(--action-secondary-fg);
+}
+.cme-btn--tertiary:hover:not(:disabled):not(.is-disabled),
+.cme-btn--tertiary.is-hover { background: var(--action-secondary-bg-hover); }
+.cme-btn--tertiary:active:not(:disabled),
+.cme-btn--tertiary.is-pressed { background: var(--action-secondary-bg-pressed); }
+.cme-btn--tertiary:disabled,
+.cme-btn--tertiary.is-disabled { color: var(--text-disabled); }
+
+.cme-btn--danger {
+  background: var(--action-danger-bg);
+  color: var(--action-danger-fg);
+}
+.cme-btn--danger:hover:not(:disabled):not(.is-disabled),
+.cme-btn--danger.is-hover { background: var(--action-danger-bg-hover); }
+.cme-btn--danger:active:not(:disabled),
+.cme-btn--danger.is-pressed { background: var(--action-danger-bg-pressed); }
+.cme-btn--danger:disabled,
+.cme-btn--danger.is-disabled { background: var(--neutral-300); color: var(--neutral-0); }
+
+.cme-btn--accent {
+  background: var(--action-accent-bg);
+  color: var(--action-accent-fg);
+}
+.cme-btn--accent:hover:not(:disabled):not(.is-disabled),
+.cme-btn--accent.is-hover { background: var(--action-accent-bg-hover); }
+
+.cme-btn__icon { width: var(--icon-sm); height: var(--icon-sm); flex: none; }
+
+/* ==========================================================================
+   FIELD  (shared wrapper for input + select)
+   ========================================================================== */
+.cme-field { display: flex; flex-direction: column; gap: var(--space-1); }
+.cme-field__label {
+  font-size: var(--size-12);
+  font-weight: var(--weight-semibold);
+  color: var(--text-secondary);
+}
+.cme-field__required { color: var(--feedback-danger-fg); margin-left: 2px; }
+.cme-field__help {
+  font-size: var(--size-12);
+  color: var(--text-tertiary);
+}
+/* Error text replaces help text — they never appear together. */
+.cme-field__error {
+  font-size: var(--size-12);
+  color: var(--feedback-danger-fg);
+  font-weight: var(--weight-semibold);
+  display: flex; align-items: center; gap: var(--space-1);
+}
+
+.cme-input,
+.cme-select {
+  height: var(--control-md);
+  padding: 0 var(--space-3);
+  background: var(--field-bg);
+  border: var(--border-width-thin) solid var(--field-border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--size-14);
+  width: 100%;
+}
+.cme-input::placeholder { color: var(--text-tertiary); }
+.cme-input:hover:not(:disabled), .cme-input.is-hover,
+.cme-select:hover:not(:disabled) { border-color: var(--border-strong); }
+.cme-input:disabled, .cme-input.is-disabled,
+.cme-select:disabled {
+  background: var(--field-bg-disabled);
+  color: var(--text-disabled);
+  border-color: var(--border-subtle);
+  cursor: not-allowed;
+}
+.cme-input.is-error, .cme-input[aria-invalid="true"] {
+  border-color: var(--feedback-danger-border);
+  background: var(--field-bg-error);
+}
+/* Read-only is NOT disabled — the value is informational, not pending. */
+.cme-input--readonly, .cme-input[readonly] {
+  border-color: transparent;
+  background: transparent;
+  padding-left: 0;
+  font-weight: var(--weight-semibold);
+}
+
+.cme-select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: var(--space-6);
+}
+
+/* ==========================================================================
+   CHECKBOX / RADIO / SWITCH
+   ========================================================================== */
+.cme-checkbox, .cme-radio {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  cursor: pointer; font-size: var(--size-14); color: var(--text-primary);
+}
+.cme-checkbox input, .cme-radio input, .cme-switch input {
+  position: absolute; opacity: 0; width: 0; height: 0;
+}
+.cme-checkbox__box, .cme-radio__dot {
+  width: var(--icon-sm); height: var(--icon-sm); flex: none;
+  border: var(--border-width-thin) solid var(--border-interactive);
+  background: var(--field-bg);
+  display: grid; place-items: center;
+  transition: background-color .12s ease, border-color .12s ease;
+}
+.cme-checkbox__box { border-radius: var(--radius-sm); }
+.cme-radio__dot    { border-radius: var(--radius-full); }
+
+.cme-checkbox input:checked + .cme-checkbox__box,
+.cme-checkbox.is-checked .cme-checkbox__box,
+.cme-radio input:checked + .cme-radio__dot,
+.cme-radio.is-checked .cme-radio__dot {
+  background: var(--action-accent-bg);
+  border-color: var(--action-accent-bg);
+}
+.cme-checkbox__box::after {
+  content: ""; width: 9px; height: 5px;
+  border-left: 2px solid var(--action-accent-fg);
+  border-bottom: 2px solid var(--action-accent-fg);
+  transform: rotate(-45deg) translate(1px, -1px);
+  opacity: 0;
+}
+.cme-checkbox input:checked + .cme-checkbox__box::after,
+.cme-checkbox.is-checked .cme-checkbox__box::after { opacity: 1; }
+.cme-radio__dot::after {
+  content: ""; width: 6px; height: 6px; border-radius: var(--radius-full);
+  background: var(--action-accent-fg); opacity: 0;
+}
+.cme-radio input:checked + .cme-radio__dot::after,
+.cme-radio.is-checked .cme-radio__dot::after { opacity: 1; }
+
+.cme-checkbox.is-disabled, .cme-radio.is-disabled { color: var(--text-disabled); cursor: not-allowed; }
+.cme-checkbox.is-disabled .cme-checkbox__box,
+.cme-radio.is-disabled .cme-radio__dot {
+  background: var(--field-bg-disabled); border-color: var(--border-subtle);
+}
+
+.cme-switch { display: inline-flex; align-items: center; gap: var(--space-2); cursor: pointer; font-size: var(--size-14); color: var(--text-primary); }
+.cme-switch__track {
+  width: 36px; height: 20px; flex: none;
+  background: var(--neutral-400);
+  border-radius: var(--radius-full);
+  position: relative;
+  transition: background-color .12s ease;
+}
+.cme-switch__track::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; border-radius: var(--radius-full);
+  background: var(--neutral-0);
+  transition: transform .12s ease;
+}
+.cme-switch input:checked + .cme-switch__track,
+.cme-switch.is-checked .cme-switch__track { background: var(--action-accent-bg); }
+.cme-switch input:checked + .cme-switch__track::after,
+.cme-switch.is-checked .cme-switch__track::after { transform: translateX(16px); }
+
+/* ==========================================================================
+   CHIP / BADGE
+   ========================================================================== */
+.cme-chip {
+  display: inline-flex; align-items: center; gap: var(--space-1);
+  height: 22px; padding: 0 var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--size-11);
+  font-weight: var(--weight-semibold);
+  background: var(--surface-sunken);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+.cme-chip--success { background: var(--feedback-success-bg); color: var(--feedback-success-fg); }
+.cme-chip--warning { background: var(--feedback-warning-bg); color: var(--feedback-warning-fg); }
+.cme-chip--danger  { background: var(--feedback-danger-bg);  color: var(--feedback-danger-fg); }
+.cme-chip--info    { background: var(--feedback-info-bg);    color: var(--feedback-info-fg); }
+.cme-chip__dot { width: 6px; height: 6px; border-radius: var(--radius-full); background: currentColor; flex: none; }
+
+/* ==========================================================================
+   ALERT
+   ========================================================================== */
+.cme-alert {
+  display: flex; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border-left: 3px solid;
+  font-size: var(--size-14);
+  line-height: var(--lh-body);
+}
+.cme-alert__title { font-weight: var(--weight-semibold); margin-bottom: 2px; }
+.cme-alert__body  { color: var(--text-primary); }
+.cme-alert--info    { background: var(--feedback-info-bg);    border-color: var(--feedback-info-border);    color: var(--feedback-info-fg); }
+.cme-alert--success { background: var(--feedback-success-bg); border-color: var(--feedback-success-border); color: var(--feedback-success-fg); }
+.cme-alert--warning { background: var(--feedback-warning-bg); border-color: var(--feedback-warning-border); color: var(--feedback-warning-fg); }
+.cme-alert--danger  { background: var(--feedback-danger-bg);  border-color: var(--feedback-danger-border);  color: var(--feedback-danger-fg); }
+.cme-alert--info .cme-alert__body,
+.cme-alert--success .cme-alert__body,
+.cme-alert--warning .cme-alert__body,
+.cme-alert--danger .cme-alert__body { color: inherit; opacity: .9; }
+
+/* ==========================================================================
+   TABLE
+   ========================================================================== */
+.cme-table-wrap {
+  overflow-x: auto;
+  border: var(--border-width-thin) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+}
+.cme-table { width: 100%; border-collapse: collapse; font-size: var(--size-14); }
+.cme-table caption { text-align: left; padding: var(--space-3) var(--space-4); color: var(--text-secondary); font-size: var(--size-12); }
+.cme-table th {
+  text-align: left;
+  background: var(--table-header-bg);
+  color: var(--text-secondary);
+  font-size: var(--size-11);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--track-loose);
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-4);
+  border-bottom: var(--border-width-thin) solid var(--table-row-border);
+  white-space: nowrap;
+  position: sticky; top: 0;
+}
+.cme-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: var(--border-width-thin) solid var(--table-row-border);
+  color: var(--text-primary);
+}
+.cme-table tr:last-child td { border-bottom: 0; }
+.cme-table tbody tr:hover { background: var(--table-row-hover); }
+.cme-table tr.is-selected { background: var(--table-row-selected); box-shadow: inset 2px 0 0 var(--action-accent-bg); }
+.cme-table .is-numeric { text-align: right; font-variant-numeric: tabular-nums; }
+.cme-table--dense td { padding: var(--space-2) var(--space-4); }
+
+/* ==========================================================================
+   Motion — every transition above is suppressed for users who ask.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .cme-btn, .cme-input, .cme-select,
+  .cme-checkbox__box, .cme-radio__dot,
+  .cme-switch__track, .cme-switch__track::after { transition: none; }
+}

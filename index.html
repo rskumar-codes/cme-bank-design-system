@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CME Bank Design System</title>
+<meta name="description" content="The design system for CME Bank — foundations, components, and the guidance for using them.">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 20 20"><path d="M10 3l8 14H2L10 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 8v4M10 14.5v.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-info" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9v5M10 6.5v.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 20 20"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 20 20"><circle cx="9" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-download" viewBox="0 0 20 20"><path d="M10 3v9m0 0l-3.5-3.5M10 12l3.5-3.5M3.5 15.5h13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 20 20"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M4 10h12m0 0l-4.5-4.5M16 10l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 20 20"><rect x="4" y="9" width="12" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 9V6.5a3 3 0 016 0V9" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-user" viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 17c0-3.3 2.7-5 6-5s6 1.7 6 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 20 20"><path d="M5 2.5h6l4 4v11H5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M11 2.5v4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 20 20"><path d="M4 6h12M8 6V4h4v2M6 6l.8 11h6.4L14 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="docs">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <nav class="sidebar" aria-label="Documentation">
+    <div class="brand">
+      <div class="brand__mark"><span class="brand__dot"></span> CME Bank</div>
+      <div class="brand__sub">Design System</div>
+      <span class="brand__ver">v1.0.0</span>
+    </div>
+
+    <label class="theme-toggle">
+      <input type="checkbox" id="themeSwitch" style="accent-color:var(--action-accent-bg)">
+      Dark mode
+    </label>
+
+    <div style="height:var(--space-4)"></div>
+
+    <div class="nav-group">
+      <div class="nav-group__title">Start</div>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#install">Getting started</a></li>
+        <li><a href="#architecture">Token architecture</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group__title">Foundations</div>
+      <ul>
+        <li><a href="#color">Color</a></li>
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#space">Spacing &amp; layout</a></li>
+        <li><a href="#elevation">Elevation &amp; shape</a></li>
+        <li><a href="#icons">Iconography</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group__title">Components</div>
+      <ul>
+        <li><a href="#button">Button</a></li>
+        <li><a href="#input">Text input</a></li>
+        <li><a href="#select">Select</a></li>
+        <li><a href="#choice">Checkbox &amp; radio</a></li>
+        <li><a href="#switch">Switch</a></li>
+        <li><a href="#chip">Chip &amp; badge</a></li>
+        <li><a href="#alert">Alert</a></li>
+        <li><a href="#table">Table</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group__title">Guidelines</div>
+      <ul>
+        <li><a href="#accessibility">Accessibility</a></li>
+        <li><a href="#content">Content style</a></li>
+        <li><a href="#contributing">Contributing</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ══════════════ MAIN ══════════════ -->
+  <main class="main">
+
+    <header class="page-head">
+      <div class="eyebrow">Design System · Version 1.0.0</div>
+      <h1>CME Bank Design System</h1>
+      <p>A shared language for building CME Bank products — the tokens, components, and rules that
+      keep onboarding, banking, and back-office surfaces feeling like one product. Everything here is
+      accessible by default and themeable without duplication.</p>
+    </header>
+
+    <!-- ─────────── OVERVIEW ─────────── -->
+    <section class="doc" id="overview">
+      <h2>Overview</h2>
+      <p>This system is organised in three layers. Work at the highest layer that solves your problem
+      and you will rarely need to look below it.</p>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Layer</th><th>What it is</th><th>When you touch it</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="tok"><strong>Components</strong></td>
+              <td>Ready-made UI — buttons, fields, tables. Accessible, themed, state-complete.</td>
+              <td>Every day. This is where product work happens.</td>
+            </tr>
+            <tr>
+              <td class="tok"><strong>Semantic tokens</strong></td>
+              <td>Named by intent — <code>--text-primary</code>, <code>--action-danger-bg</code>.</td>
+              <td>When composing layouts or building something the library doesn't cover yet.</td>
+            </tr>
+            <tr>
+              <td class="tok"><strong>Primitives</strong></td>
+              <td>The raw palette and scales — <code>--blue-400</code>, <code>--space-4</code>.</td>
+              <td>Almost never. Only when defining a new semantic token.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="note__label">The one rule that keeps this system healthy</span>
+        <p>Components reference semantic tokens. Semantic tokens reference primitives. Never skip a
+        layer — a component that reaches straight for <code>--blue-400</code> cannot be themed, and
+        will silently break the day the brand changes.</p>
+      </div>
+    </section>
+
+    <!-- ─────────── GETTING STARTED ─────────── -->
+    <section class="doc" id="install">
+      <h2>Getting started</h2>
+      <p>Two stylesheets, in this order. <code>tokens.css</code> must come first — everything else
+      resolves against it.</p>
+
+      <div class="canvas">
+        <div class="canvas__code">&lt;link rel="stylesheet" href="tokens.css"&gt;
+&lt;link rel="stylesheet" href="components.css"&gt;
+
+&lt;button class="cme-btn cme-btn--primary"&gt;Open account&lt;/button&gt;</div>
+      </div>
+
+      <h3 class="sub">Theming</h3>
+      <p>Dark mode follows the operating system automatically. To override it, set
+      <code>data-theme</code> on the root element — an explicit choice always wins over the OS
+      preference.</p>
+      <div class="canvas">
+        <div class="canvas__code">&lt;html data-theme="dark"&gt;   &lt;!-- force dark --&gt;
+&lt;html data-theme="light"&gt;  &lt;!-- force light --&gt;
+&lt;html&gt;                     &lt;!-- follow the OS --&gt;</div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">Fonts</span>
+        <p>The system uses <strong>Open Sans</strong> for customer-facing products and
+        <strong>Roboto</strong> for back-office tooling. Load them in your page head; the token file
+        falls back to the system UI font if they are unavailable, so nothing breaks — but the
+        specimen below will not be accurate until they are loaded.</p>
+      </div>
+    </section>
+
+    <!-- ─────────── ARCHITECTURE ─────────── -->
+    <section class="doc" id="architecture">
+      <h2>Token architecture</h2>
+      <p>Every visual value in the system resolves through this chain. The example follows a single
+      value from the raw palette to the pixel on screen.</p>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Tier</th><th>Token</th><th>Value</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>1 · Primitive</strong></td>
+              <td class="tok">--green-500</td>
+              <td class="tok"><span class="tokrow"><span class="tokdot" style="background:#9DCA35"></span>#9DCA35</span></td>
+              <td>Named for what it is. Never referenced by a component.</td>
+            </tr>
+            <tr>
+              <td><strong>2 · Semantic</strong></td>
+              <td class="tok">--action-primary-bg</td>
+              <td class="tok">→ var(--green-500)</td>
+              <td>Named for intent. Carries theming — this is the layer that changes per mode.</td>
+            </tr>
+            <tr>
+              <td><strong>3 · Component</strong></td>
+              <td class="tok">.cme-btn--primary</td>
+              <td class="tok">background: var(--action-primary-bg)</td>
+              <td>Consumes semantics only. No hex, no primitives, no magic numbers.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Use a component if one exists. Compose two before building a third.</li>
+            <li>Reach for semantic tokens when composing layouts.</li>
+            <li>Add a semantic token when the intent you need has no name yet.</li>
+            <li>Keep new tokens in <code>tokens.css</code> so they theme automatically.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't reference a primitive from a component or a product screen.</li>
+            <li>Don't write a hex value in product code — if it isn't a token, it isn't approved.</li>
+            <li>Don't create a component token that merely aliases a semantic one.</li>
+            <li>Don't encode a location in a name — <code>--header-button-bg</code> won't survive a redesign.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── COLOR ─────────── -->
+    <section class="doc" id="color">
+      <h2>Color</h2>
+      <p>Six ramps of ten steps. Green carries the customer-facing brand, blue the back-office and
+      informational states, and red, amber and teal are reserved for meaning — never decoration.</p>
+
+      <div class="ramp">
+        <div class="ramp__label"><b>Green</b><span>Product brand · primary actions</span></div>
+        <div class="ramp__row">
+          <div class="sw" style="background:#F8FAF5;color:#16181C"><b>50</b><span>F8FAF5</span></div>
+          <div class="sw" style="background:#EFF2E8;color:#16181C"><b>100</b><span>EFF2E8</span></div>
+          <div class="sw" style="background:#DFE9C8;color:#16181C"><b>200</b><span>DFE9C8</span></div>
+          <div class="sw" style="background:#CCE396;color:#16181C"><b>300</b><span>CCE396</span></div>
+          <div class="sw" style="background:#B4D766;color:#16181C"><b>400</b><span>B4D766</span></div>
+          <div class="sw" style="background:#9DCA35;color:#16181C"><b>500</b><span>9DCA35</span></div>
+          <div class="sw" style="background:#88AF2E;color:#16181C"><b>600</b><span>88AF2E</span></div>
+          <div class="sw" style="background:#6B8924;color:#FFF"><b>700</b><span>6B8924</span></div>
+          <div class="sw" style="background:#52691C;color:#FFF"><b>800</b><span>52691C</span></div>
+          <div class="sw" style="background:#384913;color:#FFF"><b>900</b><span>384913</span></div>
+        </div>
+      </div>
+
+      <div class="ramp">
+        <div class="ramp__label"><b>Blue</b><span>Back-office brand · informational · focus</span></div>
+        <div class="ramp__row">
+          <div class="sw" style="background:#F4F6FB;color:#16181C"><b>50</b><span>F4F6FB</span></div>
+          <div class="sw" style="background:#E6EAF5;color:#16181C"><b>100</b><span>E6EAF5</span></div>
+          <div class="sw" style="background:#C1CFF0;color:#16181C"><b>200</b><span>C1CFF0</span></div>
+          <div class="sw" style="background:#86A7F3;color:#16181C"><b>300</b><span>86A7F3</span></div>
+          <div class="sw" style="background:#376EEC;color:#FFF"><b>400</b><span>376EEC</span></div>
+          <div class="sw" style="background:#1656E9;color:#FFF"><b>500</b><span>1656E9</span></div>
+          <div class="sw" style="background:#1348C4;color:#FFF"><b>600</b><span>1348C4</span></div>
+          <div class="sw" style="background:#0F3B9E;color:#FFF"><b>700</b><span>0F3B9E</span></div>
+          <div class="sw" style="background:#0C2D79;color:#FFF"><b>800</b><span>0C2D79</span></div>
+          <div class="sw" style="background:#081F54;color:#FFF"><b>900</b><span>081F54</span></div>
+        </div>
+      </div>
+
+      <div class="ramp">
+        <div class="ramp__label"><b>Red</b><span>Errors · destructive actions</span></div>
+        <div class="ramp__row">
+          <div class="sw" style="background:#FBF4F4;color:#16181C"><b>50</b><span>FBF4F4</span></div>
+          <div class="sw" style="background:#F6E5E5;color:#16181C"><b>100</b><span>F6E5E5</span></div>
+          <div class="sw" style="background:#F5BDBD;color:#16181C"><b>200</b><span>F5BDBD</span></div>
+          <div class="sw" style="background:#FD7D7D;color:#16181C"><b>300</b><span>FD7D7D</span></div>
+          <div class="sw" style="background:#FC4040;color:#16181C"><b>400</b><span>FC4040</span></div>
+          <div class="sw" style="background:#FB0404;color:#FFF"><b>500</b><span>FB0404</span></div>
+          <div class="sw" style="background:#D30303;color:#FFF"><b>600</b><span>D30303</span></div>
+          <div class="sw" style="background:#B50303;color:#FFF"><b>700</b><span>B50303</span></div>
+          <div class="sw" style="background:#820202;color:#FFF"><b>800</b><span>820202</span></div>
+          <div class="sw" style="background:#5A0101;color:#FFF"><b>900</b><span>5A0101</span></div>
+        </div>
+      </div>
+
+      <div class="ramp">
+        <div class="ramp__label"><b>Amber</b><span>Warnings · pending states</span></div>
+        <div class="ramp__row">
+          <div class="sw" style="background:#FBF8F4;color:#16181C"><b>50</b><span>FBF8F4</span></div>
+          <div class="sw" style="background:#F6EFE4;color:#16181C"><b>100</b><span>F6EFE4</span></div>
+          <div class="sw" style="background:#F5DDBC;color:#16181C"><b>200</b><span>F5DDBC</span></div>
+          <div class="sw" style="background:#FFC77A;color:#16181C"><b>300</b><span>FFC77A</span></div>
+          <div class="sw" style="background:#FFAE3D;color:#16181C"><b>400</b><span>FFAE3D</span></div>
+          <div class="sw" style="background:#F68F00;color:#16181C"><b>500</b><span>F68F00</span></div>
+          <div class="sw" style="background:#D67D00;color:#16181C"><b>600</b><span>D67D00</span></div>
+          <div class="sw" style="background:#AD6500;color:#FFF"><b>700</b><span>AD6500</span></div>
+          <div class="sw" style="background:#854D00;color:#FFF"><b>800</b><span>854D00</span></div>
+          <div class="sw" style="background:#5C3500;color:#FFF"><b>900</b><span>5C3500</span></div>
+        </div>
+      </div>
+
+      <div class="ramp">
+        <div class="ramp__label"><b>Teal</b><span>Success · verified · positive metrics</span></div>
+        <div class="ramp__row">
+          <div class="sw" style="background:#F4FBFA;color:#16181C"><b>50</b><span>F4FBFA</span></div>
+          <div class="sw" style="background:#E6F5F3;color:#16181C"><b>100</b><span>E6F5F3</span></div>
+          <div class="sw" style="background:#C0F1EA;color:#16181C"><b>200</b><span>C0F1EA</span></div>
+          <div class="sw" style="background:#84F5E4;color:#16181C"><b>300</b><span>84F5E4</span></div>
+          <div class="sw" style="background:#4BF1D8;color:#16181C"><b>400</b><span>4BF1D8</span></div>
+          <div class="sw" style="background:#12EDCC;color:#16181C"><b>500</b><span>12EDCC</span></div>
+          <div class="sw" style="background:#0EB59C;color:#16181C"><b>600</b><span>0EB59C</span></div>
+          <div class="sw" style="background:#0CA18B;color:#FFF"><b>700</b><span>0CA18B</span></div>
+          <div class="sw" style="background:#0A7B6A;color:#FFF"><b>800</b><span>0A7B6A</span></div>
+          <div class="sw" style="background:#075549;color:#FFF"><b>900</b><span>075549</span></div>
+        </div>
+      </div>
+
+      <div class="ramp">
+        <div class="ramp__label"><b>Neutral</b><span>Text · surfaces · borders</span></div>
+        <div class="ramp__row">
+          <div class="sw" style="background:#F7F7F7;color:#16181C"><b>50</b><span>F7F7F7</span></div>
+          <div class="sw" style="background:#EDEDED;color:#16181C"><b>100</b><span>EDEDED</span></div>
+          <div class="sw" style="background:#DAD8D8;color:#16181C"><b>200</b><span>DAD8D8</span></div>
+          <div class="sw" style="background:#BFBBBB;color:#16181C"><b>300</b><span>BFBBBB</span></div>
+          <div class="sw" style="background:#A19B9B;color:#16181C"><b>400</b><span>A19B9B</span></div>
+          <div class="sw" style="background:#837C7C;color:#FFF"><b>500</b><span>837C7C</span></div>
+          <div class="sw" style="background:#6E6868;color:#FFF"><b>600</b><span>6E6868</span></div>
+          <div class="sw" style="background:#595454;color:#FFF"><b>700</b><span>595454</span></div>
+          <div class="sw" style="background:#4B4B4B;color:#FFF"><b>800</b><span>4B4B4B</span></div>
+          <div class="sw" style="background:#2F2D2D;color:#FFF"><b>900</b><span>2F2D2D</span></div>
+        </div>
+      </div>
+
+      <h3 class="sub">Semantic tokens — use these, not the ramps</h3>
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Token</th><th>Purpose</th><th>Contrast</th></tr></thead>
+          <tbody>
+            <tr><td class="tok">--text-primary</td><td>Body copy, headings, table values</td><td class="num">8.1:1</td></tr>
+            <tr><td class="tok">--text-secondary</td><td>Labels, supporting copy, table headers</td><td class="num">5.5:1</td></tr>
+            <tr><td class="tok">--text-tertiary</td><td>Helper text and timestamps. Never for essential copy.</td><td class="num">4.1:1</td></tr>
+            <tr><td class="tok">--text-link</td><td>Inline links. Must also carry an underline.</td><td class="num">5.9:1</td></tr>
+            <tr><td class="tok">--action-primary-bg</td><td>The one main action on a screen</td><td class="num">5.1:1</td></tr>
+            <tr><td class="tok">--action-danger-bg</td><td>Destructive, irreversible actions only</td><td class="num">7.1:1</td></tr>
+            <tr><td class="tok">--action-accent-bg</td><td>Back-office primary, selection, focus</td><td class="num">4.6:1</td></tr>
+            <tr><td class="tok">--border-interactive</td><td>Input and control borders</td><td class="num">4.1:1</td></tr>
+            <tr><td class="tok">--border-subtle</td><td>Decorative dividers only — carries no meaning</td><td class="num">—</td></tr>
+            <tr><td class="tok">--feedback-*-bg / -fg</td><td>Success, warning, danger, info surfaces</td><td class="num">6.5:1+</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Pair a <code>-bg</code> token with its matching <code>-fg</code> token — those pairs are verified.</li>
+            <li>Reserve red, amber and teal for meaning. A teal button is not a "nice green".</li>
+            <li>Pair every status color with text or an icon.</li>
+            <li>Use <code>--border-interactive</code> for anything a user can act on.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't invent pairings across ramps — mixing an unverified fg/bg can fail contrast.</li>
+            <li>Don't use steps 400–600 of amber or teal as text colors; they are fills.</li>
+            <li>Don't rely on color alone to communicate state.</li>
+            <li>Don't use <code>--border-subtle</code> for input borders — it is below the 3:1 minimum by design.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── TYPOGRAPHY ─────────── -->
+    <section class="doc" id="typography">
+      <h2>Typography</h2>
+      <p>Nine styles. Open Sans for customer products, Roboto for back-office. Line height is always
+      a unitless ratio so a style can be reused at any size without breaking.</p>
+
+      <div class="specimen">
+        <div class="specimen__row">
+          <div class="specimen__meta"><b>display-lg</b>24px · 1.25 · 700</div>
+          <div style="font-size:24px;line-height:1.25;font-weight:700;letter-spacing:-.02em">Transfer confirmed</div>
+        </div>
+        <div class="specimen__row">
+          <div class="specimen__meta"><b>heading-lg</b>20px · 1.3 · 600</div>
+          <div style="font-size:20px;line-height:1.3;font-weight:600;letter-spacing:-.01em">Account overview</div>
+        </div>
+        <div class="specimen__row">
+          <div class="specimen__meta"><b>heading-md</b>16px · 1.4 · 600</div>
+          <div style="font-size:16px;line-height:1.4;font-weight:600">Recent transactions</div>
+        </div>
+        <div class="specimen__row">
+          <div class="specimen__meta"><b>body-lg</b>16px · 1.5 · 400</div>
+          <div style="font-size:16px;line-height:1.5">Input values and read-only figures</div>
+        </div>
+        <div class="specimen__row">
+          <div class="specimen__meta"><b>body-md</b>14px · 1.5 · 400</div>
+          <div style="font-size:14px;line-height:1.5">The default for nearly all interface text. When in doubt, use this one.</div>
+        </div>
+        <div class="specimen__row">
+          <div class="specimen__meta"><b>body-md-strong</b>14px · 1.5 · 600</div>
+          <div style="font-size:14px;line-height:1.5;font-weight:600">Emphasis and form labels</div>
+        </div>
+        <div class="specimen__row">
+          <div class="specimen__meta"><b>body-sm</b>12px · 1.5 · 400</div>
+          <div style="font-size:12px;line-height:1.5">Helper text beneath a field, and secondary detail.</div>
+        </div>
+        <div class="specimen__row">
+          <div class="specimen__meta"><b>caption</b>11px · 1.45 · 400</div>
+          <div style="font-size:11px;line-height:1.45">Timestamps and table secondary values</div>
+        </div>
+        <div class="specimen__row">
+          <div class="specimen__meta"><b>overline</b>11px · 1.45 · 600 · 0.08em</div>
+          <div style="font-size:11px;line-height:1.45;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Table header</div>
+        </div>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Use <code>body-md</code> as the default and step away only with reason.</li>
+            <li>One <code>display-lg</code> per view — it marks the page, not a section.</li>
+            <li>Keep running text near 65–75 characters per line.</li>
+            <li>Use <code>overline</code> for table headers and eyebrows.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't introduce sizes outside the scale — 13px and 18px are deliberately absent.</li>
+            <li>Don't go below 11px. It fails legibility at any weight.</li>
+            <li>Don't mix Open Sans and Roboto in one product surface.</li>
+            <li>Don't use uppercase for anything longer than a few words.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── SPACING ─────────── -->
+    <section class="doc" id="space">
+      <h2>Spacing &amp; layout</h2>
+      <p>A 4px base scale. Every gap, pad and margin in the system is one of these values — which is
+      what keeps density consistent across screens built by different teams.</p>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Token</th><th class="num">Value</th><th>Use it for</th></tr></thead>
+          <tbody>
+            <tr><td class="tok">--space-1</td><td class="num">4px</td><td>Icon to label, inside a chip</td></tr>
+            <tr><td class="tok">--space-2</td><td class="num">8px</td><td>Inside controls, tight stacks</td></tr>
+            <tr><td class="tok">--space-3</td><td class="num">12px</td><td>Horizontal padding in controls</td></tr>
+            <tr><td class="tok">--space-4</td><td class="num">16px</td><td>Between form fields</td></tr>
+            <tr><td class="tok">--space-5</td><td class="num">24px</td><td>Between field groups</td></tr>
+            <tr><td class="tok">--space-6</td><td class="num">32px</td><td>Card padding, gaps between blocks</td></tr>
+            <tr><td class="tok">--space-8</td><td class="num">48px</td><td>Between page sections</td></tr>
+            <tr><td class="tok">--space-10</td><td class="num">64px</td><td>Desktop page margins</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub">Control heights</h3>
+      <p>Buttons, inputs and selects share one height scale so they line up on a row. Pick one size
+      per row and stay with it.</p>
+      <div class="canvas">
+        <div class="canvas__stage">
+          <button class="cme-btn cme-btn--secondary cme-btn--sm">Small · 28px</button>
+          <button class="cme-btn cme-btn--secondary">Medium · 36px</button>
+          <button class="cme-btn cme-btn--secondary cme-btn--lg">Large · 44px</button>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">Touch targets</span>
+        <p>Use <code>--control-lg</code> (44px) for any control that ships on mobile. WCAG 2.5.5 asks
+        for 44×44px, and the smaller sizes do not meet it — they are for dense desktop tables and
+        inline filters only.</p>
+      </div>
+    </section>
+
+    <!-- ─────────── ELEVATION ─────────── -->
+    <section class="doc" id="elevation">
+      <h2>Elevation &amp; shape</h2>
+      <p>Three elevations and five radii. Elevation communicates layering, not importance — a shadow
+      means "this floats above", never "this matters more".</p>
+
+      <div class="canvas">
+        <div class="canvas__stage">
+          <div style="background:var(--surface-raised);padding:var(--space-4) var(--space-5);border-radius:var(--radius-lg);box-shadow:var(--elevation-raised);font-size:var(--size-12)">
+            <strong>raised</strong><br><span style="color:var(--text-tertiary)">Cards, tiles at rest</span>
+          </div>
+          <div style="background:var(--surface-raised);padding:var(--space-4) var(--space-5);border-radius:var(--radius-lg);box-shadow:var(--elevation-overlay);font-size:var(--size-12)">
+            <strong>overlay</strong><br><span style="color:var(--text-tertiary)">Dropdowns, popovers, tooltips</span>
+          </div>
+          <div style="background:var(--surface-raised);padding:var(--space-4) var(--space-5);border-radius:var(--radius-lg);box-shadow:var(--elevation-modal);font-size:var(--size-12)">
+            <strong>modal</strong><br><span style="color:var(--text-tertiary)">Dialogs only</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Token</th><th class="num">Value</th><th>Applies to</th></tr></thead>
+          <tbody>
+            <tr><td class="tok">--radius-sm</td><td class="num">2px</td><td>Chips, tags, badges</td></tr>
+            <tr><td class="tok">--radius-md</td><td class="num">4px</td><td>Buttons, inputs, selects — the default</td></tr>
+            <tr><td class="tok">--radius-lg</td><td class="num">8px</td><td>Cards, modals, popovers</td></tr>
+            <tr><td class="tok">--radius-full</td><td class="num">999px</td><td>Avatars, status dots, switches</td></tr>
+            <tr><td class="tok">--radius-none</td><td class="num">0</td><td>Table cells, full-bleed bars</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─────────── ICONS ─────────── -->
+    <section class="doc" id="icons">
+      <h2>Iconography</h2>
+      <p>Icons are single-stroke, drawn on a 20×20 grid with a 1.6–1.8px stroke, and always inherit
+      <code>currentColor</code> so they theme automatically.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage" style="gap:var(--space-6)">
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-check"/></svg>check</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-alert"/></svg>alert</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-info"/></svg>info</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-x"/></svg>close</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-search"/></svg>search</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-download"/></svg>download</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-plus"/></svg>plus</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-arrow"/></svg>arrow</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-lock"/></svg>lock</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-user"/></svg>user</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-doc"/></svg>document</span>
+          <span style="display:grid;place-items:center;gap:6px;font-size:11px;color:var(--text-tertiary)"><svg width="24" height="24"><use href="#i-trash"/></svg>delete</span>
+        </div>
+        <div class="canvas__code">&lt;svg width="16" height="16" aria-hidden="true"&gt;&lt;use href="#i-check"/&gt;&lt;/svg&gt;</div>
+      </div>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Size</th><th class="num">Value</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td class="tok">--icon-sm</td><td class="num">16px</td><td>Inside buttons, inputs, chips</td></tr>
+            <tr><td class="tok">--icon-md</td><td class="num">20px</td><td>Standalone icon buttons, nav</td></tr>
+            <tr><td class="tok">--icon-lg</td><td class="num">24px</td><td>Feature and status icons</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Add <code>aria-hidden="true"</code> when the icon sits beside a text label.</li>
+            <li>Give icon-only buttons an <code>aria-label</code> naming the action.</li>
+            <li>Let icons inherit <code>currentColor</code> so they theme with their parent.</li>
+            <li>Keep one icon per meaning across all products.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't use an icon alone to convey status — pair it with text.</li>
+            <li>Don't scale an icon to a size outside the three above.</li>
+            <li>Don't recolor an icon to a hue that carries a different meaning.</li>
+            <li>Don't rely on a tooltip as the only label for an icon button.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ BUTTON ═════════════ -->
+    <section class="doc" id="button">
+      <h2>Button</h2>
+      <p>Triggers an action. Five variants, three sizes. The variant communicates how consequential
+      the action is — pick by consequence, not by how the screen looks.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage">
+          <button class="cme-btn cme-btn--primary">Open account</button>
+          <button class="cme-btn cme-btn--secondary">Save draft</button>
+          <button class="cme-btn cme-btn--tertiary">Cancel</button>
+          <button class="cme-btn cme-btn--danger">Close account</button>
+          <button class="cme-btn cme-btn--accent">Approve</button>
+        </div>
+        <div class="canvas__code">&lt;button class="cme-btn cme-btn--primary"&gt;Open account&lt;/button&gt;</div>
+      </div>
+
+      <h3 class="sub">Variants</h3>
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Variant</th><th>Use it when</th><th>Per view</th></tr></thead>
+          <tbody>
+            <tr><td class="tok">--primary</td><td>The single most important action on the screen</td><td>One</td></tr>
+            <tr><td class="tok">--secondary</td><td>A meaningful alternative to the primary action</td><td>One or two</td></tr>
+            <tr><td class="tok">--tertiary</td><td>Low-emphasis actions — cancel, dismiss, inline edit</td><td>Any</td></tr>
+            <tr><td class="tok">--danger</td><td>Destructive and irreversible actions only</td><td>Rarely</td></tr>
+            <tr><td class="tok">--accent</td><td>Back-office primary actions where blue is the brand</td><td>One</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub">States</h3>
+      <div class="canvas">
+        <div class="canvas__stage canvas__stage--stack">
+          <div class="matrix">
+            <div class="matrix__row">
+              <span class="matrix__label"></span>
+              <span class="matrix__label matrix__head">Rest</span>
+              <span class="matrix__label matrix__head">Hover</span>
+              <span class="matrix__label matrix__head">Pressed</span>
+              <span class="matrix__label matrix__head">Focus</span>
+              <span class="matrix__label matrix__head">Disabled</span>
+            </div>
+            <div class="matrix__row">
+              <span class="matrix__label">Primary</span>
+              <button class="cme-btn cme-btn--primary">Confirm</button>
+              <button class="cme-btn cme-btn--primary is-hover">Confirm</button>
+              <button class="cme-btn cme-btn--primary is-pressed">Confirm</button>
+              <button class="cme-btn cme-btn--primary is-focus">Confirm</button>
+              <button class="cme-btn cme-btn--primary is-disabled" disabled>Confirm</button>
+            </div>
+            <div class="matrix__row">
+              <span class="matrix__label">Secondary</span>
+              <button class="cme-btn cme-btn--secondary">Confirm</button>
+              <button class="cme-btn cme-btn--secondary is-hover">Confirm</button>
+              <button class="cme-btn cme-btn--secondary is-pressed">Confirm</button>
+              <button class="cme-btn cme-btn--secondary is-focus">Confirm</button>
+              <button class="cme-btn cme-btn--secondary is-disabled" disabled>Confirm</button>
+            </div>
+            <div class="matrix__row">
+              <span class="matrix__label">Tertiary</span>
+              <button class="cme-btn cme-btn--tertiary">Confirm</button>
+              <button class="cme-btn cme-btn--tertiary is-hover">Confirm</button>
+              <button class="cme-btn cme-btn--tertiary is-pressed">Confirm</button>
+              <button class="cme-btn cme-btn--tertiary is-focus">Confirm</button>
+              <button class="cme-btn cme-btn--tertiary is-disabled" disabled>Confirm</button>
+            </div>
+            <div class="matrix__row">
+              <span class="matrix__label">Danger</span>
+              <button class="cme-btn cme-btn--danger">Delete</button>
+              <button class="cme-btn cme-btn--danger is-hover">Delete</button>
+              <button class="cme-btn cme-btn--danger is-pressed">Delete</button>
+              <button class="cme-btn cme-btn--danger is-focus">Delete</button>
+              <button class="cme-btn cme-btn--danger is-disabled" disabled>Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">Why the primary button lightens on hover</span>
+        <p>The brand green is a light hue, so its label is dark. Darkening the background on hover
+        would push the label below 4.5:1 — so the interaction ramp moves the other way. Rest, hover
+        and pressed measure 5.1:1, 6.0:1 and 7.0:1 respectively: contrast <em>improves</em> as the
+        user engages.</p>
+      </div>
+
+      <h3 class="sub">With icons</h3>
+      <div class="canvas">
+        <div class="canvas__stage">
+          <button class="cme-btn cme-btn--primary"><svg class="cme-btn__icon" aria-hidden="true"><use href="#i-plus"/></svg> New transfer</button>
+          <button class="cme-btn cme-btn--secondary">Continue <svg class="cme-btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button class="cme-btn cme-btn--tertiary" aria-label="Delete transaction"><svg class="cme-btn__icon" aria-hidden="true"><use href="#i-trash"/></svg></button>
+        </div>
+        <div class="canvas__code">&lt;button class="cme-btn cme-btn--tertiary" aria-label="Delete transaction"&gt;
+  &lt;svg class="cme-btn__icon" aria-hidden="true"&gt;&lt;use href="#i-trash"/&gt;&lt;/svg&gt;
+&lt;/button&gt;</div>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Lead the label with a verb — <em>Save changes</em>, <em>Verify identity</em>.</li>
+            <li>Keep one primary button per view. If two compete, one isn't primary.</li>
+            <li>Put a leading icon before the label; reserve trailing icons for direction.</li>
+            <li>Explain nearby what would enable a disabled button.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't write <em>Submit</em>, <em>OK</em> or <em>Yes</em>. Name the outcome.</li>
+            <li>Don't create a new variant for a one-off color.</li>
+            <li>Don't use <code>--danger</code> for anything reversible.</li>
+            <li>Don't put a spinner in place of the label — keep the label, swap the icon.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub">Accessibility</h3>
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Requirement</th><th>Implementation</th></tr></thead>
+          <tbody>
+            <tr><td>Element</td><td>A real <code>&lt;button&gt;</code>. A styled <code>div</code> is not keyboard operable.</td></tr>
+            <tr><td>Keyboard</td><td>Reachable by Tab; fires on Enter and Space.</td></tr>
+            <tr><td>Focus</td><td>2px ring at 2px offset, provided by the system. Never remove it.</td></tr>
+            <tr><td>Icon-only</td><td>Requires <code>aria-label</code>. A tooltip alone is not sufficient.</td></tr>
+            <tr><td>Loading</td><td>Set <code>aria-busy="true"</code> and keep the label in place.</td></tr>
+            <tr><td>Touch</td><td>Use <code>--lg</code> on mobile for a 44×44px target.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═════════════ TEXT INPUT ═════════════ -->
+    <section class="doc" id="input">
+      <h2>Text input</h2>
+      <p>Collects a single line of text. Always paired with a visible label — the placeholder is a
+      hint, never a substitute.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage">
+          <div class="cme-field" style="min-width:260px">
+            <label class="cme-field__label" for="d-email">Email address <span class="cme-field__required">*</span></label>
+            <input class="cme-input" id="d-email" type="email" placeholder="name@example.com">
+            <span class="cme-field__help">We'll only use this to verify your account.</span>
+          </div>
+        </div>
+        <div class="canvas__code">&lt;div class="cme-field"&gt;
+  &lt;label class="cme-field__label" for="email"&gt;Email address&lt;/label&gt;
+  &lt;input class="cme-input" id="email" type="email" placeholder="name@example.com"&gt;
+  &lt;span class="cme-field__help"&gt;We'll only use this to verify your account.&lt;/span&gt;
+&lt;/div&gt;</div>
+      </div>
+
+      <h3 class="sub">States</h3>
+      <div class="canvas">
+        <div class="canvas__stage" style="align-items:flex-start">
+          <div class="cme-field" style="min-width:210px">
+            <label class="cme-field__label">Rest</label>
+            <input class="cme-input" placeholder="Placeholder">
+          </div>
+          <div class="cme-field" style="min-width:210px">
+            <label class="cme-field__label">Hover</label>
+            <input class="cme-input is-hover" value="Hovered">
+          </div>
+          <div class="cme-field" style="min-width:210px">
+            <label class="cme-field__label">Focus</label>
+            <input class="cme-input is-focus" value="Receiving input">
+          </div>
+          <div class="cme-field" style="min-width:210px">
+            <label class="cme-field__label">Error</label>
+            <input class="cme-input is-error" value="not-an-email" aria-invalid="true">
+            <span class="cme-field__error"><svg width="12" height="12" aria-hidden="true"><use href="#i-alert"/></svg> Enter an email address like name@example.com</span>
+          </div>
+          <div class="cme-field" style="min-width:210px">
+            <label class="cme-field__label">Disabled</label>
+            <input class="cme-input" value="Cannot edit yet" disabled>
+          </div>
+          <div class="cme-field" style="min-width:210px">
+            <label class="cme-field__label">Read-only</label>
+            <input class="cme-input cme-input--readonly" value="GB29 NWBK 6016 1331 9268 19" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">Disabled is not read-only</span>
+        <p><strong>Disabled</strong> means "you can't edit this <em>yet</em>" — something must happen
+        first. <strong>Read-only</strong> means "this value is informational and never editable".
+        They look different on purpose: a read-only value drops its box entirely so it doesn't invite
+        a click that will never work.</p>
+      </div>
+
+      <h3 class="sub">Anatomy</h3>
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Part</th><th>Token</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Label</td><td class="tok">body-sm · --text-secondary</td><td>Always visible. Required fields carry an asterisk.</td></tr>
+            <tr><td>Field</td><td class="tok">--control-md · --field-border</td><td>36px tall, 12px horizontal padding.</td></tr>
+            <tr><td>Placeholder</td><td class="tok">--text-tertiary</td><td>An example of the format, not an instruction.</td></tr>
+            <tr><td>Helper</td><td class="tok">body-sm · --text-tertiary</td><td>Shares its slot with the error message.</td></tr>
+            <tr><td>Error</td><td class="tok">body-sm · --feedback-danger-fg</td><td>Replaces the helper text — they never both appear.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Show a persistent label above every field.</li>
+            <li>Validate on blur, not on every keystroke.</li>
+            <li>Say what to do: <em>Enter a date after today</em>, not <em>Invalid date</em>.</li>
+            <li>Set the correct <code>autocomplete</code> token on identity and address fields.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't use the placeholder as the label — it disappears on input.</li>
+            <li>Don't show helper text and an error at the same time.</li>
+            <li>Don't rely on the red border alone to signal an error.</li>
+            <li>Don't clear the field when validation fails.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub">Accessibility</h3>
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Requirement</th><th>Implementation</th></tr></thead>
+          <tbody>
+            <tr><td>Label</td><td><code>&lt;label for&gt;</code> tied to the input <code>id</code>.</td></tr>
+            <tr><td>Required</td><td><code>required</code> plus a legend explaining the asterisk.</td></tr>
+            <tr><td>Error</td><td><code>aria-invalid="true"</code> and <code>aria-describedby</code> pointing at the message.</td></tr>
+            <tr><td>Announcement</td><td>Wrap the error in <code>role="alert"</code> so it is read when it appears.</td></tr>
+            <tr><td>Helper</td><td>Link with <code>aria-describedby</code> — visual proximity is not enough.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═════════════ SELECT ═════════════ -->
+    <section class="doc" id="select">
+      <h2>Select</h2>
+      <p>Chooses one option from a known list. Shares the field anatomy with the text input — same
+      height, padding, border and states.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage" style="align-items:flex-start">
+          <div class="cme-field" style="min-width:240px">
+            <label class="cme-field__label" for="d-country">Country of residence</label>
+            <select class="cme-select" id="d-country">
+              <option>United Kingdom</option>
+              <option>India</option>
+              <option>Singapore</option>
+              <option>United States</option>
+            </select>
+          </div>
+          <div class="cme-field" style="min-width:240px">
+            <label class="cme-field__label">Disabled</label>
+            <select class="cme-select" disabled><option>Not available</option></select>
+          </div>
+        </div>
+        <div class="canvas__code">&lt;select class="cme-select" id="country"&gt;
+  &lt;option&gt;United Kingdom&lt;/option&gt;
+&lt;/select&gt;</div>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Use the native <code>&lt;select&gt;</code> wherever possible — it is accessible for free.</li>
+            <li>Add search once the list passes roughly ten options.</li>
+            <li>Order options meaningfully — frequency or alphabetically, not arbitrarily.</li>
+            <li>Match the menu width to the trigger.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't use a select for fewer than four options — radios show them all at once.</li>
+            <li>Don't nest submenus. Use a two-panel picker instead.</li>
+            <li>Don't rebuild a custom dropdown without the full ARIA combobox pattern.</li>
+            <li>Don't let hover move the keyboard focus position.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">If you must build a custom select</span>
+        <p>You take on the whole ARIA combobox contract: <code>role="combobox"</code> with
+        <code>aria-expanded</code> on the trigger, <code>role="listbox"</code> and
+        <code>role="option"</code> in the list, arrow-key navigation, Enter to select, Escape to close
+        and restore focus, and <code>aria-activedescendant</code> so DOM focus stays on the trigger.
+        The native element gives you all of that already.</p>
+      </div>
+    </section>
+
+    <!-- ═════════════ CHECKBOX & RADIO ═════════════ -->
+    <section class="doc" id="choice">
+      <h2>Checkbox &amp; radio</h2>
+      <p>Checkboxes select any number of independent options. Radios select exactly one from a set —
+      and a set always has a default.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage" style="gap:var(--space-6)">
+          <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+            <label class="cme-checkbox"><input type="checkbox" checked><span class="cme-checkbox__box"></span> Paperless statements</label>
+            <label class="cme-checkbox"><input type="checkbox"><span class="cme-checkbox__box"></span> Marketing emails</label>
+            <label class="cme-checkbox is-disabled"><input type="checkbox" disabled><span class="cme-checkbox__box"></span> Unavailable option</label>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+            <label class="cme-radio"><input type="radio" name="acct" checked><span class="cme-radio__dot"></span> Current account</label>
+            <label class="cme-radio"><input type="radio" name="acct"><span class="cme-radio__dot"></span> Savings account</label>
+            <label class="cme-radio is-disabled"><input type="radio" name="acct" disabled><span class="cme-radio__dot"></span> Business account</label>
+          </div>
+        </div>
+        <div class="canvas__code">&lt;label class="cme-checkbox"&gt;
+  &lt;input type="checkbox"&gt;&lt;span class="cme-checkbox__box"&gt;&lt;/span&gt; Paperless statements
+&lt;/label&gt;</div>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Write labels as positive statements — <em>Paperless statements</em>, not <em>No paper</em>.</li>
+            <li>Make the whole label clickable by wrapping the input in it.</li>
+            <li>Always preselect a radio option.</li>
+            <li>Group related choices in a <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code>.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't use a checkbox where only one option can apply — that's a radio.</li>
+            <li>Don't use radios for on/off — that's a switch.</li>
+            <li>Don't leave a radio group with nothing selected.</li>
+            <li>Don't apply a change immediately from a checkbox inside a form with a save button.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ SWITCH ═════════════ -->
+    <section class="doc" id="switch">
+      <h2>Switch</h2>
+      <p>Turns a setting on or off, applying immediately. If the change needs a save button, use a
+      checkbox instead.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage" style="gap:var(--space-5)">
+          <label class="cme-switch"><input type="checkbox" checked><span class="cme-switch__track"></span> Two-factor authentication</label>
+          <label class="cme-switch"><input type="checkbox"><span class="cme-switch__track"></span> Travel notifications</label>
+        </div>
+        <div class="canvas__code">&lt;label class="cme-switch"&gt;
+  &lt;input type="checkbox" role="switch" checked&gt;&lt;span class="cme-switch__track"&gt;&lt;/span&gt; Two-factor authentication
+&lt;/label&gt;</div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">Switch or checkbox?</span>
+        <p>A switch takes effect the moment it is flipped. A checkbox states an intention that is
+        committed later, when the form is submitted. Choosing the wrong one is the most common source
+        of "did that save?" confusion.</p>
+      </div>
+    </section>
+
+    <!-- ═════════════ CHIP ═════════════ -->
+    <section class="doc" id="chip">
+      <h2>Chip &amp; badge</h2>
+      <p>A compact, read-only marker for status or category. Every chip pairs a color with a word —
+      the color reinforces the label, it never replaces it.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage">
+          <span class="cme-chip"><span class="cme-chip__dot"></span> Draft</span>
+          <span class="cme-chip cme-chip--success"><span class="cme-chip__dot"></span> Verified</span>
+          <span class="cme-chip cme-chip--warning"><span class="cme-chip__dot"></span> Pending review</span>
+          <span class="cme-chip cme-chip--danger"><span class="cme-chip__dot"></span> Rejected</span>
+          <span class="cme-chip cme-chip--info"><span class="cme-chip__dot"></span> In progress</span>
+        </div>
+        <div class="canvas__code">&lt;span class="cme-chip cme-chip--success"&gt;&lt;span class="cme-chip__dot"&gt;&lt;/span&gt; Verified&lt;/span&gt;</div>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Keep labels to one or two words.</li>
+            <li>Use one consistent chip colour per status across every product.</li>
+            <li>Include the dot — it helps at a glance in dense tables.</li>
+            <li>Use sentence case.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't make chips clickable. If it acts, it's a button.</li>
+            <li>Don't use a bare colored dot with no text.</li>
+            <li>Don't invent new chip colours for new statuses — map to the four meanings.</li>
+            <li>Don't stack more than three chips in one table cell.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ ALERT ═════════════ -->
+    <section class="doc" id="alert">
+      <h2>Alert</h2>
+      <p>Communicates something the user needs to know about the current context. Four intents, each
+      with a verified color pairing in both themes.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage canvas__stage--stack">
+          <div class="cme-alert cme-alert--info">
+            <svg width="20" height="20" style="flex:none" aria-hidden="true"><use href="#i-info"/></svg>
+            <div><div class="cme-alert__title">Verification takes up to 2 working days</div>
+            <div class="cme-alert__body">We'll email you as soon as your documents have been reviewed.</div></div>
+          </div>
+          <div class="cme-alert cme-alert--success" role="status">
+            <svg width="20" height="20" style="flex:none" aria-hidden="true"><use href="#i-check"/></svg>
+            <div><div class="cme-alert__title">Transfer sent</div>
+            <div class="cme-alert__body">£1,250.00 to Priya Raman will arrive within 2 hours.</div></div>
+          </div>
+          <div class="cme-alert cme-alert--warning">
+            <svg width="20" height="20" style="flex:none" aria-hidden="true"><use href="#i-alert"/></svg>
+            <div><div class="cme-alert__title">Your passport expires in 30 days</div>
+            <div class="cme-alert__body">Upload a renewed document to keep your account active.</div></div>
+          </div>
+          <div class="cme-alert cme-alert--danger" role="alert">
+            <svg width="20" height="20" style="flex:none" aria-hidden="true"><use href="#i-alert"/></svg>
+            <div><div class="cme-alert__title">We couldn't process this payment</div>
+            <div class="cme-alert__body">The account number failed validation. Check the details and try again.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Intent</th><th>Use it for</th><th>ARIA</th></tr></thead>
+          <tbody>
+            <tr><td class="tok">--info</td><td>Neutral context the user should know</td><td>none</td></tr>
+            <tr><td class="tok">--success</td><td>An action completed</td><td><code>role="status"</code></td></tr>
+            <tr><td class="tok">--warning</td><td>Something will become a problem if ignored</td><td>none</td></tr>
+            <tr><td class="tok">--danger</td><td>Something failed and needs attention now</td><td><code>role="alert"</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>State what happened, then what to do about it.</li>
+            <li>Place the alert next to what it refers to.</li>
+            <li>Use <code>role="alert"</code> only for errors — it interrupts screen readers.</li>
+            <li>Let the user dismiss anything non-blocking.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't apologise. Explain the problem and the fix.</li>
+            <li>Don't stack more than one alert per region.</li>
+            <li>Don't use danger styling for a warning — it dilutes real errors.</li>
+            <li>Don't auto-dismiss a message the user must act on.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ TABLE ═════════════ -->
+    <section class="doc" id="table">
+      <h2>Table</h2>
+      <p>Displays structured records for comparison and scanning. The densest surface in the
+      back-office, so every visual channel it uses has to earn its place.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage canvas__stage--plain" style="padding:0">
+          <div class="cme-table-wrap" style="border:0;border-radius:0;width:100%">
+            <table class="cme-table">
+              <caption>Recent transactions — March 2026</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Reference</th>
+                  <th scope="col">Beneficiary</th>
+                  <th scope="col">Status</th>
+                  <th scope="col" class="is-numeric">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mono">TRX-88213</td><td>Priya Raman</td>
+                  <td><span class="cme-chip cme-chip--success"><span class="cme-chip__dot"></span> Settled</span></td>
+                  <td class="is-numeric">1,250.00</td>
+                </tr>
+                <tr class="is-selected">
+                  <td class="mono">TRX-88214</td><td>Northgate Utilities</td>
+                  <td><span class="cme-chip cme-chip--warning"><span class="cme-chip__dot"></span> Pending</span></td>
+                  <td class="is-numeric">84.60</td>
+                </tr>
+                <tr>
+                  <td class="mono">TRX-88215</td><td>Meridian Logistics Ltd</td>
+                  <td><span class="cme-chip cme-chip--danger"><span class="cme-chip__dot"></span> Returned</span></td>
+                  <td class="is-numeric">12,400.00</td>
+                </tr>
+                <tr>
+                  <td class="mono">TRX-88216</td><td>A. Okonkwo</td>
+                  <td><span class="cme-chip"><span class="cme-chip__dot"></span> Draft</span></td>
+                  <td class="is-numeric">305.75</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">Zebra striping is off by default</span>
+        <p>Background is a scarce channel in a dense table, and selection and row status both need it.
+        A 1px row rule separates rows perfectly well. Turn striping on only when a table is wide,
+        read across, and carries neither selection nor per-row status.</p>
+      </div>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Element</th><th>Specification</th></tr></thead>
+          <tbody>
+            <tr><td>Header</td><td><code>overline</code> in <code>--text-secondary</code>, sticky on vertical scroll</td></tr>
+            <tr><td>Row height</td><td>40px comfortable, 32px dense — one setting per table</td></tr>
+            <tr><td>Selection</td><td><code>--table-row-selected</code> plus a 2px leading edge marker</td></tr>
+            <tr><td>Numbers</td><td>Right-aligned, tabular figures, consistent decimal places</td></tr>
+            <tr><td>Sorting</td><td>Arrow in the header and <code>aria-sort</code> on the active column</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Freeze the identifying column when the table scrolls sideways.</li>
+            <li>Show skeleton rows while loading so the layout doesn't jump.</li>
+            <li>Reveal row actions on hover <em>and</em> on focus.</li>
+            <li>Give every table a <code>&lt;caption&gt;</code>, visually hidden if needed.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't build a table from <code>div</code>s — screen readers lose the structure.</li>
+            <li>Don't combine zebra striping with row selection.</li>
+            <li>Don't right-align text or centre anything but icons.</li>
+            <li>Don't paginate below about 50 rows — scrolling is cheaper for the reader.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ ACCESSIBILITY ═════════════ -->
+    <section class="doc" id="accessibility">
+      <h2>Accessibility</h2>
+      <p>These are commitments, not aspirations. Each is testable, so compliance is something you can
+      demonstrate rather than claim. The components on this page already meet them.</p>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Rule</th><th class="num">Threshold</th><th>How to check it</th></tr></thead>
+          <tbody>
+            <tr><td>Body text contrast</td><td class="num">4.5:1</td><td>Every shipped fg/bg token pair is verified in both themes.</td></tr>
+            <tr><td>Large text (24px, or 18.66px bold)</td><td class="num">3:1</td><td>Same check, size-aware.</td></tr>
+            <tr><td>Control borders &amp; focus rings</td><td class="num">3:1</td><td>WCAG 1.4.11. Use <code>--border-interactive</code>, never <code>--border-subtle</code>.</td></tr>
+            <tr><td>Focus always visible</td><td class="num">Always</td><td>Tab through the page. Never <code>outline:none</code> without a replacement.</td></tr>
+            <tr><td>Touch target</td><td class="num">44×44px</td><td>WCAG 2.5.5. Use <code>--control-lg</code> on mobile.</td></tr>
+            <tr><td>Colour is never alone</td><td class="num">—</td><td>Every status carries text or an icon as well as colour.</td></tr>
+            <tr><td>Motion</td><td class="num">—</td><td>All transitions honour <code>prefers-reduced-motion</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="note__label">On disabled controls</span>
+        <p>Disabled text sits at 3.5:1, below the 4.5:1 body minimum. This is deliberate and
+        permitted — WCAG 1.4.3 exempts inactive controls, and dimming is how "unavailable" reads. What
+        the exemption does <em>not</em> cover is using the disabled colour for ordinary secondary
+        text: use <code>--text-secondary</code> or <code>--text-tertiary</code> for that.</p>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Test with the keyboard alone before you ship.</li>
+            <li>Give every form control a programmatically associated label.</li>
+            <li>Announce dynamic changes with a live region.</li>
+            <li>Respect the user's motion and contrast preferences.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't use <code>placeholder</code> as a label.</li>
+            <li>Don't trap keyboard focus inside a component.</li>
+            <li>Don't convey state with colour alone.</li>
+            <li>Don't set a positive <code>tabindex</code> — it breaks the natural order.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════ CONTENT ═════════════ -->
+    <section class="doc" id="content">
+      <h2>Content style</h2>
+      <p>Words are part of the interface. These rules keep the voice consistent across every surface.</p>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Rule</th><th>Instead of</th><th>Write</th></tr></thead>
+          <tbody>
+            <tr><td>Name the outcome on buttons</td><td>Submit</td><td>Open account</td></tr>
+            <tr><td>Say what to fix in errors</td><td>Invalid input</td><td>Enter a date after today</td></tr>
+            <tr><td>Use the user's words</td><td>Configure webhook</td><td>Set up notifications</td></tr>
+            <tr><td>Active voice</td><td>Your payment was declined</td><td>We couldn't process your payment</td></tr>
+            <tr><td>Sentence case everywhere</td><td>Transfer Funds Now</td><td>Transfer funds now</td></tr>
+            <tr><td>No apologies</td><td>Sorry, something went wrong</td><td>We couldn't save your changes. Try again.</td></tr>
+            <tr><td>Numerals for data</td><td>two thousand pounds</td><td>£2,000.00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═════════════ CONTRIBUTING ═════════════ -->
+    <section class="doc" id="contributing">
+      <h2>Contributing</h2>
+      <p>How something new gets into the system, and how it changes once it's here.</p>
+
+      <h3 class="sub">Adding a component</h3>
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Step</th><th>What's required</th></tr></thead>
+          <tbody>
+            <tr><td class="tok">1 · Search</td><td>Show which existing components you reviewed and why each fell short.</td></tr>
+            <tr><td class="tok">2 · Propose</td><td>The use case, the variants needed, and which products will consume it.</td></tr>
+            <tr><td class="tok">3 · Prove</td><td>Two independent teams need it. Until then it lives locally in your product.</td></tr>
+            <tr><td class="tok">4 · Build</td><td>All states covered, semantic tokens only — no hex values, no primitives.</td></tr>
+            <tr><td class="tok">5 · Document</td><td>Anatomy, do/don't, and the accessibility contract, before it ships.</td></tr>
+            <tr><td class="tok">6 · Review</td><td>The system owner signs off on naming and token usage.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="note__label">The rule of two</span>
+        <p>Step 3 is the one that keeps this library from sprawling. A component earns a place in the
+        shared system when a <em>second</em> team needs it. Before that, it is product-local work —
+        and most one-off components never find a second consumer.</p>
+      </div>
+
+      <h3 class="sub">Naming</h3>
+      <div class="canvas">
+        <div class="canvas__code">--[category]-[concept]-[variant]-[state]
+
+  --action-primary-bg-hover
+    │       │       │  └── state — omitted when it is the rest state
+    │       │       └───── property — bg · fg · border
+    │       └───────────── variant — primary · secondary · danger
+    └───────────────────── category — action · text · surface · border · feedback
+
+Rules
+  · lowercase, hyphen-separated, singular nouns
+  · never encode a literal value   →  not --action-primary-green
+  · never encode a location        →  not --header-button-bg</div>
+      </div>
+
+      <h3 class="sub">Versioning</h3>
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Change</th><th>Release</th><th>What you owe consumers</th></tr></thead>
+          <tbody>
+            <tr><td>New token or component</td><td class="tok">minor</td><td>A changelog entry.</td></tr>
+            <tr><td>Value changed within its stated intent</td><td class="tok">minor</td><td>Changelog plus a visual diff.</td></tr>
+            <tr><td>Token renamed or removed</td><td class="tok">major</td><td>Deprecate for one minor first, then remove.</td></tr>
+            <tr><td>Component API changed</td><td class="tok">major</td><td>A migration note with before and after.</td></tr>
+            <tr><td>Accessibility correction</td><td class="tok">patch</td><td>Ships immediately; documented straight after.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub">Deprecation</h3>
+      <p>Nothing is deleted without notice. Every retirement follows the same four steps: mark the
+      token or component as deprecated with a pointer to its replacement, announce it in the
+      changelog, keep both working for one minor version, then remove it at the next major with a
+      migration note listing every mapping.</p>
+    </section>
+
+    <footer class="docs-footer">
+      <p>CME Bank Design System · v1.0.0 · Every colour pairing documented here has been verified
+      against WCAG 2.1 in both light and dark themes.</p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // Theme toggle. An explicit choice is stored and always wins over the OS preference.
+  (function () {
+    var box = document.getElementById('themeSwitch');
+    var saved = localStorage.getItem('cme-theme');
+    if (saved) {
+      document.documentElement.setAttribute('data-theme', saved);
+      box.checked = saved === 'dark';
+    } else {
+      box.checked = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    box.addEventListener('change', function () {
+      var mode = box.checked ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', mode);
+      localStorage.setItem('cme-theme', mode);
+    });
+  })();
+</script>
+
+</body>
+</html>
