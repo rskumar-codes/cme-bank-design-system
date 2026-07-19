@@ -8,12 +8,19 @@
      Tier 2  Semantic    — intent. This is the theming layer.
      Tier 3  Component   — only when a component genuinely diverges.
 
-   Rule: a component references Tier 2. If you find yourself reaching for a
-   Tier 1 primitive inside a component, the semantic token you need is missing.
-   Add it here rather than reaching past it.
+   ── PROVENANCE ────────────────────────────────────────────────────────────
+   Every colour primitive is tagged:
 
-   Every foreground/background pair defined below has been verified against
-   WCAG 2.1 in both light and dark mode. Ratios are noted inline.
+     [file]     This exact hex already existed in the CompLib Figma library.
+     [derived]  Interpolated from the family anchor, because the library had
+                no usable colour at that lightness. The reason is on the line.
+
+   42 of 63 colour steps come directly from the library. The derived ones
+   exist only where the library's own colours could not form a coherent
+   scale — measured, not assumed. Each ramp's note states what was measured.
+
+   Every foreground/background pair below is verified against WCAG 2.1 in
+   both light and dark mode. Ratios are noted inline.
    ========================================================================== */
 
 :root {
@@ -23,80 +30,95 @@
      Do not use these directly in components.
      ====================================================================== */
 
-  /* Green — product brand. Anchor #88AF2E sits at 600. */
-  --green-50:  #F8FAF5;
-  --green-100: #EFF2E8;
-  --green-200: #DFE9C8;
-  --green-300: #CCE396;
-  --green-400: #B4D766;
-  --green-500: #9DCA35;
-  --green-600: #88AF2E;  /* anchor */
-  --green-700: #6B8924;
-  --green-800: #52691C;
-  --green-900: #384913;
+  /* ── GREEN — product brand ────────────────────────────────────────────
+     Anchor #88AF2E (600). The library's greens span 68° of hue: the brand
+     is chartreuse (78°) but its dark greens — #219039, #1D6E40 — are
+     forest greens 54–67° away, from a different palette. They cannot form
+     one ramp, so 700–900 are derived from the anchor.                   */
+  --green-50:  #FAFFEE;  /* [file] */
+  --green-100: #EDF5E5;  /* [file] */
+  --green-200: #DFE9C8;  /* [derived] library's #DADFCF has the right hue but S=0.20
+                                      against neighbours at 0.44 / 0.53 — reads grey */
+  --green-300: #CBE09B;  /* [file] */
+  --green-400: #B4DF52;  /* [file] */
+  --green-500: #9CC53E;  /* [file] */
+  --green-600: #88AF2E;  /* [file] ANCHOR — the brand green */
+  --green-700: #6B8924;  /* [derived] library's #219039 is 54° off-hue */
+  --green-800: #52691C;  /* [derived] library's #1D6E40 is 67° off-hue */
+  --green-900: #384913;  /* [derived] no coherent dark chartreuse in library */
 
-  /* Blue — back-office brand + informational. Anchor #376EEC sits at 400. */
-  --blue-50:  #F4F6FB;
-  --blue-100: #E6EAF5;
-  --blue-200: #C1CFF0;
-  --blue-300: #86A7F3;
-  --blue-400: #376EEC;  /* anchor */
-  --blue-500: #1656E9;
-  --blue-600: #1348C4;
-  --blue-700: #0F3B9E;
-  --blue-800: #0C2D79;
-  --blue-900: #081F54;
+  /* ── BLUE — back-office brand, informational, focus ───────────────────
+     Anchor #376EEC (400). Coherent in the library: 13.3° spread. Only the
+     two darkest steps are missing.                                      */
+  --blue-50:  #F0F7FF;  /* [file] */
+  --blue-100: #DAE6FF;  /* [file] */
+  --blue-200: #C0CCF1;  /* [file] */
+  --blue-300: #86A7F3;  /* [file] */
+  --blue-400: #376EEC;  /* [file] ANCHOR — back-office primary */
+  --blue-500: #225BDF;  /* [file] */
+  --blue-600: #0A58CA;  /* [file] */
+  --blue-700: #0F3A9E;  /* [file] */
+  --blue-800: #0C2D79;  /* [derived] library's #2A4766 is desaturated slate */
+  --blue-900: #081F54;  /* [derived] library's #1F2937 is a neutral, not a blue */
 
-  /* Red — negative. Anchor #B50303 sits at 700. */
-  --red-50:  #FBF4F4;
-  --red-100: #F6E5E5;
-  --red-200: #F5BDBD;
-  --red-300: #FD7D7D;
-  --red-400: #FC4040;
-  --red-500: #FB0404;
-  --red-600: #D30303;
-  --red-700: #B50303;  /* anchor */
-  --red-800: #820202;
-  --red-900: #5A0101;
+  /* ── RED — errors, destructive actions ───────────────────────────────
+     Anchor #AB0808 (700). Fully coherent in the library: 0° spread.
+     Nine of ten steps are real.                                         */
+  --red-50:  #FFF0F0;  /* [file] */
+  --red-100: #FFE0E0;  /* [file] */
+  --red-200: #FFB8B8;  /* [file] */
+  --red-300: #FE6E6E;  /* [file] */
+  --red-400: #FB3838;  /* [file] */
+  --red-500: #DF2727;  /* [file] */
+  --red-600: #DA0505;  /* [file] */
+  --red-700: #AB0808;  /* [file] ANCHOR */
+  --red-800: #7B1313;  /* [file] */
+  --red-900: #580404;  /* [derived] library has no red below L=0.28 */
 
-  /* Amber — warning. Anchor #F68F00 sits at 500. */
-  --amber-50:  #FBF8F4;
-  --amber-100: #F6EFE4;
-  --amber-200: #F5DDBC;
-  --amber-300: #FFC77A;
-  --amber-400: #FFAE3D;
-  --amber-500: #F68F00;  /* anchor */
-  --amber-600: #D67D00;
-  --amber-700: #AD6500;
-  --amber-800: #854D00;
-  --amber-900: #5C3500;
+  /* ── AMBER — warnings, pending states ────────────────────────────────
+     Anchor #FF7A00 (500). The library's amber family mixes true orange
+     with yellow-tan (#EDE08A, #C3B77B) and has no dark end at all.      */
+  --amber-50:  #FFFBF1;  /* [file] */
+  --amber-100: #FFF0D6;  /* [file] */
+  --amber-200: #F7D7BB;  /* [derived] library's #EFE0C7 is tan, 30° off-hue */
+  --amber-300: #FFBA7A;  /* [derived] library's #EDE08A is yellow, not amber */
+  --amber-400: #FF9A3D;  /* [derived] library's #C3B77B is tan */
+  --amber-500: #FF7A00;  /* [file] ANCHOR */
+  --amber-600: #D66600;  /* [derived] library's #D15A05 sits at the wrong lightness */
+  --amber-700: #AD5300;  /* [derived] library's #9F7417 is olive-tinted */
+  --amber-800: #853F00;  /* [derived] not present in library */
+  --amber-900: #5C2C00;  /* [derived] not present in library */
 
-  /* Teal — positive. Anchor #0EB59C sits at 600. */
-  --teal-50:  #F4FBFA;
-  --teal-100: #E6F5F3;
-  --teal-200: #C0F1EA;
-  --teal-300: #84F5E4;
-  --teal-400: #4BF1D8;
-  --teal-500: #12EDCC;
-  --teal-600: #0EB59C;  /* anchor */
-  --teal-700: #0CA18B;
-  --teal-800: #0A7B6A;
-  --teal-900: #075549;
+  /* ── TEAL — success, verified, positive ──────────────────────────────
+     Anchor #0EB59C (600). The library's teals invert at 500/600 and its
+     dark end lands on #1D5774 (a blue) and #263238 (a slate).           */
+  --teal-50:  #E9FFFC;  /* [file] */
+  --teal-100: #D4FFFB;  /* [file] */
+  --teal-200: #BBF4E8;  /* [file] */
+  --teal-300: #84F5E4;  /* [derived] library's #66EECF breaks the lightness step */
+  --teal-400: #4BF1D8;  /* [derived] library's #4FE0BE breaks the lightness step */
+  --teal-500: #12EDCC;  /* [derived] library's #3EBDA0 is darker than its own 600 */
+  --teal-600: #0EB59C;  /* [file] ANCHOR */
+  --teal-700: #0A9C86;  /* [file] */
+  --teal-800: #0A7B6A;  /* [derived] library's #1D5774 is a blue */
+  --teal-900: #075549;  /* [derived] library's #263238 is a slate */
 
-  /* Neutral — text and surfaces. Anchor #4B4B4B sits at 800. */
-  --neutral-0:    #FFFFFF;
-  --neutral-50:   #F7F7F7;
-  --neutral-100:  #EDEDED;
-  --neutral-200:  #DAD8D8;
-  --neutral-300:  #BFBBBB;
-  --neutral-400:  #A19B9B;
-  --neutral-500:  #837C7C;
-  --neutral-600:  #6E6868;
-  --neutral-700:  #595454;
-  --neutral-800:  #4B4B4B;  /* anchor */
-  --neutral-900:  #2F2D2D;
-  --neutral-950:  #1F1E1E;
-  --neutral-1000: #131212;
+  /* ── NEUTRAL — text and surfaces ─────────────────────────────────────
+     Anchor #4B4B4B (800). Fully coherent: 0° spread, every step real.
+     Only the dark-mode extremes are derived.                            */
+  --neutral-0:    #FFFFFF;  /* [file] */
+  --neutral-50:   #F7F7F7;  /* [file] */
+  --neutral-100:  #EEEEEE;  /* [file] */
+  --neutral-200:  #DBDBDB;  /* [file] */
+  --neutral-300:  #BABABA;  /* [file] */
+  --neutral-400:  #9F9F9F;  /* [file] */
+  --neutral-500:  #7B7C7F;  /* [file] */
+  --neutral-600:  #6E6D6D;  /* [file] */
+  --neutral-700:  #535353;  /* [file] */
+  --neutral-800:  #4B4B4B;  /* [file] ANCHOR */
+  --neutral-900:  #2B2F32;  /* [file] */
+  --neutral-950:  #1F1E1E;  /* [derived] dark-mode canvas */
+  --neutral-1000: #131212;  /* [derived] dark-mode sunken surface */
 
   /* Dimensions — 4px base */
   --space-0:  0;
@@ -113,6 +135,7 @@
   --radius-sm:   2px;
   --radius-md:   4px;
   --radius-lg:   8px;
+  --radius-12:   12px;
   --radius-full: 999px;
 
   --border-width-thin:  1px;
@@ -160,23 +183,23 @@
   --surface-inverse: var(--neutral-900);
   --surface-overlay: rgba(19, 18, 18, 0.45);
 
-  --text-primary:   var(--neutral-800);  /* 8.14:1 on canvas */
-  --text-secondary: var(--neutral-600);  /* 5.46:1 on raised */
-  --text-tertiary:  var(--neutral-500);  /* 4.09:1 — large / non-essential only */
+  --text-primary:   var(--neutral-800);  /* 8.06:1 on canvas */
+  --text-secondary: var(--neutral-600);  /* 5.19:1 on raised */
+  --text-tertiary:  var(--neutral-500);  /* 4.30:1 — large / non-essential only */
   --text-disabled:  var(--neutral-400);  /* exempt per WCAG 1.4.3 */
   --text-inverse:   var(--neutral-0);
-  --text-link:      var(--blue-500);     /* 5.93:1 on raised */
+  --text-link:      var(--blue-500);     /* 6.68:1 on raised */
 
   --border-subtle:      var(--neutral-200);  /* decorative dividers only */
-  --border-interactive: var(--neutral-500);  /* 4.09:1 — meets WCAG 1.4.11 */
+  --border-interactive: var(--neutral-500);  /* 4.30:1 — meets WCAG 1.4.11 */
   --border-strong:      var(--neutral-600);
   --border-focus:       var(--blue-400);     /* 4.56:1 */
 
-  /* Primary action. Brand green is a LIGHT hue, so the label stays dark and
-     the interaction ramp LIGHTENS. Darkening would drop below 4.5:1. */
-  --action-primary-bg:          var(--green-500);  /* 5.13:1 with fg */
-  --action-primary-bg-hover:    var(--green-400);  /* 6.03:1 */
-  --action-primary-bg-pressed:  var(--green-300);  /* 7.04:1 */
+  /* Primary action. The brand green is a LIGHT hue, so the label stays dark
+     and the interaction ramp LIGHTENS. Darkening drops below 4.5:1. */
+  --action-primary-bg:          var(--green-500);  /* 4.91:1 with fg */
+  --action-primary-bg-hover:    var(--green-400);  /* 6.39:1 */
+  --action-primary-bg-pressed:  var(--green-300);  /* 6.89:1 */
   --action-primary-bg-disabled: var(--green-100);
   --action-primary-fg:          var(--green-900);
   --action-primary-fg-disabled: var(--green-700);
@@ -187,37 +210,49 @@
   --action-secondary-border:     var(--neutral-500);
   --action-secondary-fg:         var(--neutral-800);
 
-  --action-danger-bg:         var(--red-700);   /* 7.05:1 with white */
-  --action-danger-bg-hover:   var(--red-800);   /* 10.72:1 */
+  --action-danger-bg:         var(--red-700);   /* 7.58:1 with white */
+  --action-danger-bg-hover:   var(--red-800);   /* 10.80:1 */
   --action-danger-bg-pressed: var(--red-900);
   --action-danger-fg:         var(--neutral-0);
 
+  /* Back-office primary. Blue is the yup-bo brand, not the product brand —
+     use --action-primary on customer-facing surfaces. */
   --action-accent-bg:       var(--blue-400);   /* 4.56:1 with white */
-  --action-accent-bg-hover: var(--blue-500);   /* 5.93:1 */
+  --action-accent-bg-hover: var(--blue-500);   /* 6.68:1 */
   --action-accent-fg:       var(--neutral-0);
+
+  /* Selection — checkbox, radio, switch, selected rows.
+     Bound to the PRODUCT brand, not the back-office blue. Same dark-on-light
+     rule as the primary button, for the same contrast reason: a white mark on
+     the brand green measures only 2.56:1. */
+  --selection-bg:       var(--green-500);  /* 4.91:1 with fg */
+  --selection-bg-hover: var(--green-400);  /* 6.39:1 */
+  --selection-fg:       var(--green-900);
+  --selection-subtle:   var(--green-50);   /* selected table rows */
+  --selection-border:   var(--green-600);
 
   --feedback-danger-bg:      var(--red-50);
   --feedback-danger-border:  var(--red-700);
-  --feedback-danger-fg:      var(--red-700);    /* 6.49:1 */
+  --feedback-danger-fg:      var(--red-700);    /* 6.94:1 */
   --feedback-success-bg:     var(--teal-100);
   --feedback-success-border: var(--teal-700);
-  --feedback-success-fg:     var(--teal-900);   /* 7.78:1 */
+  --feedback-success-fg:     var(--teal-900);   /* 8.35:1 */
   --feedback-warning-bg:     var(--amber-200);
   --feedback-warning-border: var(--amber-700);
-  --feedback-warning-fg:     var(--amber-900);  /* 8.12:1 */
+  --feedback-warning-fg:     var(--amber-900);  /* 8.09:1 */
   --feedback-info-bg:        var(--blue-100);
   --feedback-info-border:    var(--blue-400);
-  --feedback-info-fg:        var(--blue-700);   /* 8.16:1 */
+  --feedback-info-fg:        var(--blue-700);   /* 8.66:1 */
 
   --field-bg:          var(--neutral-0);
   --field-bg-disabled: var(--neutral-100);
   --field-bg-error:    var(--red-50);
   --field-border:      var(--border-interactive);
 
-  --table-header-bg:   var(--neutral-50);
-  --table-row-hover:   var(--neutral-50);
-  --table-row-selected:var(--blue-50);
-  --table-row-border:  var(--neutral-200);
+  --table-header-bg:    var(--neutral-50);
+  --table-row-hover:    var(--neutral-50);
+  --table-row-selected: var(--selection-subtle);
+  --table-row-border:   var(--neutral-200);
 
   --elevation-raised:  0 1px 3px rgba(19,18,18,.10);
   --elevation-overlay: 0 4px 12px rgba(19,18,18,.14);
@@ -239,20 +274,20 @@
     --surface-inverse: var(--neutral-0);
     --surface-overlay: rgba(0, 0, 0, 0.65);
 
-    --text-primary:   var(--neutral-100);  /* 11.69:1 on raised */
-    --text-secondary: var(--neutral-300);  /* 7.20:1 */
-    --text-tertiary:  var(--neutral-400);  /* 5.00:1 */
+    --text-primary:   var(--neutral-100);  /* 11.64:1 on raised */
+    --text-secondary: var(--neutral-300);  /* 6.96:1 */
+    --text-tertiary:  var(--neutral-400);  /* 5.10:1 */
     --text-disabled:  var(--neutral-600);
     --text-inverse:   var(--neutral-900);
-    --text-link:      var(--blue-300);     /* 5.76:1 */
+    --text-link:      var(--blue-300);     /* 5.68:1 */
 
     --border-subtle:      var(--neutral-700);
-    --border-interactive: var(--neutral-500);  /* 3.35:1 — meets 1.4.11 */
+    --border-interactive: var(--neutral-500);  /* 3.24:1 — meets 1.4.11 */
     --border-strong:      var(--neutral-400);
-    --border-focus:       var(--blue-300);     /* 5.76:1 */
+    --border-focus:       var(--blue-300);     /* 5.68:1 */
 
-    --action-primary-bg:          var(--green-400);  /* 6.03:1 */
-    --action-primary-bg-hover:    var(--green-300);  /* 7.04:1 */
+    --action-primary-bg:          var(--green-400);  /* 6.39:1 */
+    --action-primary-bg-hover:    var(--green-300);  /* 6.89:1 */
     --action-primary-bg-pressed:  var(--green-200);  /* 7.80:1 */
     --action-primary-bg-disabled: var(--neutral-800);
     --action-primary-fg:          var(--green-900);
@@ -266,12 +301,18 @@
     --action-accent-bg-hover: var(--blue-300);
     --action-accent-fg:       var(--neutral-0);
 
+    --selection-bg:       var(--green-400);  /* 6.39:1 with fg */
+    --selection-bg-hover: var(--green-300);  /* 6.89:1 */
+    --selection-fg:       var(--green-900);
+    --selection-subtle:   var(--green-900);
+    --selection-border:   var(--green-400);
+
     --feedback-danger-bg:      var(--red-900);
-    --feedback-danger-fg:      var(--red-300);    /* 5.84:1 */
+    --feedback-danger-fg:      var(--red-300);    /* 5.35:1 */
     --feedback-success-bg:     var(--teal-900);
     --feedback-success-fg:     var(--teal-300);   /* 6.72:1 */
     --feedback-warning-bg:     var(--amber-900);
-    --feedback-warning-fg:     var(--amber-300);  /* 6.98:1 */
+    --feedback-warning-fg:     var(--amber-300);  /* 6.92:1 */
     --feedback-info-bg:        var(--blue-900);
     --feedback-info-fg:        var(--blue-300);   /* 6.62:1 */
 
@@ -281,7 +322,7 @@
 
     --table-header-bg:    var(--neutral-1000);
     --table-row-hover:    var(--neutral-800);
-    --table-row-selected: var(--blue-900);
+    --table-row-selected: var(--selection-subtle);
     --table-row-border:   var(--neutral-800);
 
     --elevation-raised:  0 1px 3px rgba(0,0,0,.40);
@@ -325,6 +366,12 @@
   --action-accent-bg-hover: var(--blue-300);
   --action-accent-fg:       var(--neutral-0);
 
+  --selection-bg:       var(--green-400);
+  --selection-bg-hover: var(--green-300);
+  --selection-fg:       var(--green-900);
+  --selection-subtle:   var(--green-900);
+  --selection-border:   var(--green-400);
+
   --feedback-danger-bg:      var(--red-900);
   --feedback-danger-fg:      var(--red-300);
   --feedback-success-bg:     var(--teal-900);
@@ -340,7 +387,7 @@
 
   --table-header-bg:    var(--neutral-1000);
   --table-row-hover:    var(--neutral-800);
-  --table-row-selected: var(--blue-900);
+  --table-row-selected: var(--selection-subtle);
   --table-row-border:   var(--neutral-800);
 
   --elevation-raised:  0 1px 3px rgba(0,0,0,.40);

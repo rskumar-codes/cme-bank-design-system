@@ -180,7 +180,7 @@
             <tr>
               <td><strong>1 · Primitive</strong></td>
               <td class="tok">--green-500</td>
-              <td class="tok"><span class="tokrow"><span class="tokdot" style="background:#9DCA35"></span>#9DCA35</span></td>
+              <td class="tok"><span class="tokrow"><span class="tokdot" style="background:#9CC53E"></span>#9CC53E</span></td>
               <td>Named for what it is. Never referenced by a component.</td>
             </tr>
             <tr>
@@ -226,100 +226,98 @@
       <h2>Color</h2>
       <p>Six ramps of ten steps. Green carries the customer-facing brand, blue the back-office and
       informational states, and red, amber and teal are reserved for meaning — never decoration.</p>
+      <p class="legend"><b>42 of 63 steps come directly from the CompLib library.</b> Steps marked
+      <em>◦</em> are derived — used only where the library had no colour that fitted the scale.
+      Every one is justified on its line in <code>tokens.css</code>.</p>
 
       <div class="ramp">
-        <div class="ramp__label"><b>Green</b><span>Product brand · primary actions</span></div>
+        <div class="ramp__label"><b>Green</b><span>Product brand · primary actions · selection</span><span class="prov">Anchor #88AF2E at 600 · 7 of 10 from library</span></div>
         <div class="ramp__row">
-          <div class="sw" style="background:#F8FAF5;color:#16181C"><b>50</b><span>F8FAF5</span></div>
-          <div class="sw" style="background:#EFF2E8;color:#16181C"><b>100</b><span>EFF2E8</span></div>
-          <div class="sw" style="background:#DFE9C8;color:#16181C"><b>200</b><span>DFE9C8</span></div>
-          <div class="sw" style="background:#CCE396;color:#16181C"><b>300</b><span>CCE396</span></div>
-          <div class="sw" style="background:#B4D766;color:#16181C"><b>400</b><span>B4D766</span></div>
-          <div class="sw" style="background:#9DCA35;color:#16181C"><b>500</b><span>9DCA35</span></div>
+          <div class="sw" style="background:#FAFFEE;color:#16181C"><b>50</b><span>FAFFEE</span></div>
+          <div class="sw" style="background:#EDF5E5;color:#16181C"><b>100</b><span>EDF5E5</span></div>
+          <div class="sw" style="background:#DFE9C8;color:#16181C"><b>200</b><span>DFE9C8</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#CBE09B;color:#16181C"><b>300</b><span>CBE09B</span></div>
+          <div class="sw" style="background:#B4DF52;color:#16181C"><b>400</b><span>B4DF52</span></div>
+          <div class="sw" style="background:#9CC53E;color:#16181C"><b>500</b><span>9CC53E</span></div>
           <div class="sw" style="background:#88AF2E;color:#16181C"><b>600</b><span>88AF2E</span></div>
-          <div class="sw" style="background:#6B8924;color:#FFF"><b>700</b><span>6B8924</span></div>
-          <div class="sw" style="background:#52691C;color:#FFF"><b>800</b><span>52691C</span></div>
-          <div class="sw" style="background:#384913;color:#FFF"><b>900</b><span>384913</span></div>
+          <div class="sw" style="background:#6B8924;color:#FFF"><b>700</b><span>6B8924</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#52691C;color:#FFF"><b>800</b><span>52691C</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#384913;color:#FFF"><b>900</b><span>384913</span><em title="Derived — see tokens.css for why">◦</em></div>
         </div>
       </div>
-
       <div class="ramp">
-        <div class="ramp__label"><b>Blue</b><span>Back-office brand · informational · focus</span></div>
+        <div class="ramp__label"><b>Blue</b><span>Back-office brand · informational · focus</span><span class="prov">Anchor #376EEC at 400 · 8 of 10 from library</span></div>
         <div class="ramp__row">
-          <div class="sw" style="background:#F4F6FB;color:#16181C"><b>50</b><span>F4F6FB</span></div>
-          <div class="sw" style="background:#E6EAF5;color:#16181C"><b>100</b><span>E6EAF5</span></div>
-          <div class="sw" style="background:#C1CFF0;color:#16181C"><b>200</b><span>C1CFF0</span></div>
+          <div class="sw" style="background:#F0F7FF;color:#16181C"><b>50</b><span>F0F7FF</span></div>
+          <div class="sw" style="background:#DAE6FF;color:#16181C"><b>100</b><span>DAE6FF</span></div>
+          <div class="sw" style="background:#C0CCF1;color:#16181C"><b>200</b><span>C0CCF1</span></div>
           <div class="sw" style="background:#86A7F3;color:#16181C"><b>300</b><span>86A7F3</span></div>
           <div class="sw" style="background:#376EEC;color:#FFF"><b>400</b><span>376EEC</span></div>
-          <div class="sw" style="background:#1656E9;color:#FFF"><b>500</b><span>1656E9</span></div>
-          <div class="sw" style="background:#1348C4;color:#FFF"><b>600</b><span>1348C4</span></div>
-          <div class="sw" style="background:#0F3B9E;color:#FFF"><b>700</b><span>0F3B9E</span></div>
-          <div class="sw" style="background:#0C2D79;color:#FFF"><b>800</b><span>0C2D79</span></div>
-          <div class="sw" style="background:#081F54;color:#FFF"><b>900</b><span>081F54</span></div>
+          <div class="sw" style="background:#225BDF;color:#FFF"><b>500</b><span>225BDF</span></div>
+          <div class="sw" style="background:#0A58CA;color:#FFF"><b>600</b><span>0A58CA</span></div>
+          <div class="sw" style="background:#0F3A9E;color:#FFF"><b>700</b><span>0F3A9E</span></div>
+          <div class="sw" style="background:#0C2D79;color:#FFF"><b>800</b><span>0C2D79</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#081F54;color:#FFF"><b>900</b><span>081F54</span><em title="Derived — see tokens.css for why">◦</em></div>
         </div>
       </div>
-
       <div class="ramp">
-        <div class="ramp__label"><b>Red</b><span>Errors · destructive actions</span></div>
+        <div class="ramp__label"><b>Red</b><span>Errors · destructive actions</span><span class="prov">Anchor #AB0808 at 700 · 9 of 10 from library</span></div>
         <div class="ramp__row">
-          <div class="sw" style="background:#FBF4F4;color:#16181C"><b>50</b><span>FBF4F4</span></div>
-          <div class="sw" style="background:#F6E5E5;color:#16181C"><b>100</b><span>F6E5E5</span></div>
-          <div class="sw" style="background:#F5BDBD;color:#16181C"><b>200</b><span>F5BDBD</span></div>
-          <div class="sw" style="background:#FD7D7D;color:#16181C"><b>300</b><span>FD7D7D</span></div>
-          <div class="sw" style="background:#FC4040;color:#16181C"><b>400</b><span>FC4040</span></div>
-          <div class="sw" style="background:#FB0404;color:#FFF"><b>500</b><span>FB0404</span></div>
-          <div class="sw" style="background:#D30303;color:#FFF"><b>600</b><span>D30303</span></div>
-          <div class="sw" style="background:#B50303;color:#FFF"><b>700</b><span>B50303</span></div>
-          <div class="sw" style="background:#820202;color:#FFF"><b>800</b><span>820202</span></div>
-          <div class="sw" style="background:#5A0101;color:#FFF"><b>900</b><span>5A0101</span></div>
+          <div class="sw" style="background:#FFF0F0;color:#16181C"><b>50</b><span>FFF0F0</span></div>
+          <div class="sw" style="background:#FFE0E0;color:#16181C"><b>100</b><span>FFE0E0</span></div>
+          <div class="sw" style="background:#FFB8B8;color:#16181C"><b>200</b><span>FFB8B8</span></div>
+          <div class="sw" style="background:#FE6E6E;color:#FFF"><b>300</b><span>FE6E6E</span></div>
+          <div class="sw" style="background:#FB3838;color:#FFF"><b>400</b><span>FB3838</span></div>
+          <div class="sw" style="background:#DF2727;color:#FFF"><b>500</b><span>DF2727</span></div>
+          <div class="sw" style="background:#DA0505;color:#FFF"><b>600</b><span>DA0505</span></div>
+          <div class="sw" style="background:#AB0808;color:#FFF"><b>700</b><span>AB0808</span></div>
+          <div class="sw" style="background:#7B1313;color:#FFF"><b>800</b><span>7B1313</span></div>
+          <div class="sw" style="background:#580404;color:#FFF"><b>900</b><span>580404</span><em title="Derived — see tokens.css for why">◦</em></div>
         </div>
       </div>
-
       <div class="ramp">
-        <div class="ramp__label"><b>Amber</b><span>Warnings · pending states</span></div>
+        <div class="ramp__label"><b>Amber</b><span>Warnings · pending states</span><span class="prov">Anchor #FF7A00 at 500 · 3 of 10 from library</span></div>
         <div class="ramp__row">
-          <div class="sw" style="background:#FBF8F4;color:#16181C"><b>50</b><span>FBF8F4</span></div>
-          <div class="sw" style="background:#F6EFE4;color:#16181C"><b>100</b><span>F6EFE4</span></div>
-          <div class="sw" style="background:#F5DDBC;color:#16181C"><b>200</b><span>F5DDBC</span></div>
-          <div class="sw" style="background:#FFC77A;color:#16181C"><b>300</b><span>FFC77A</span></div>
-          <div class="sw" style="background:#FFAE3D;color:#16181C"><b>400</b><span>FFAE3D</span></div>
-          <div class="sw" style="background:#F68F00;color:#16181C"><b>500</b><span>F68F00</span></div>
-          <div class="sw" style="background:#D67D00;color:#16181C"><b>600</b><span>D67D00</span></div>
-          <div class="sw" style="background:#AD6500;color:#FFF"><b>700</b><span>AD6500</span></div>
-          <div class="sw" style="background:#854D00;color:#FFF"><b>800</b><span>854D00</span></div>
-          <div class="sw" style="background:#5C3500;color:#FFF"><b>900</b><span>5C3500</span></div>
+          <div class="sw" style="background:#FFFBF1;color:#16181C"><b>50</b><span>FFFBF1</span></div>
+          <div class="sw" style="background:#FFF0D6;color:#16181C"><b>100</b><span>FFF0D6</span></div>
+          <div class="sw" style="background:#F7D7BB;color:#16181C"><b>200</b><span>F7D7BB</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#FFBA7A;color:#16181C"><b>300</b><span>FFBA7A</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#FF9A3D;color:#16181C"><b>400</b><span>FF9A3D</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#FF7A00;color:#16181C"><b>500</b><span>FF7A00</span></div>
+          <div class="sw" style="background:#D66600;color:#FFF"><b>600</b><span>D66600</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#AD5300;color:#FFF"><b>700</b><span>AD5300</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#853F00;color:#FFF"><b>800</b><span>853F00</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#5C2C00;color:#FFF"><b>900</b><span>5C2C00</span><em title="Derived — see tokens.css for why">◦</em></div>
         </div>
       </div>
-
       <div class="ramp">
-        <div class="ramp__label"><b>Teal</b><span>Success · verified · positive metrics</span></div>
+        <div class="ramp__label"><b>Teal</b><span>Success · verified · positive</span><span class="prov">Anchor #0EB59C at 600 · 5 of 10 from library</span></div>
         <div class="ramp__row">
-          <div class="sw" style="background:#F4FBFA;color:#16181C"><b>50</b><span>F4FBFA</span></div>
-          <div class="sw" style="background:#E6F5F3;color:#16181C"><b>100</b><span>E6F5F3</span></div>
-          <div class="sw" style="background:#C0F1EA;color:#16181C"><b>200</b><span>C0F1EA</span></div>
-          <div class="sw" style="background:#84F5E4;color:#16181C"><b>300</b><span>84F5E4</span></div>
-          <div class="sw" style="background:#4BF1D8;color:#16181C"><b>400</b><span>4BF1D8</span></div>
-          <div class="sw" style="background:#12EDCC;color:#16181C"><b>500</b><span>12EDCC</span></div>
+          <div class="sw" style="background:#E9FFFC;color:#16181C"><b>50</b><span>E9FFFC</span></div>
+          <div class="sw" style="background:#D4FFFB;color:#16181C"><b>100</b><span>D4FFFB</span></div>
+          <div class="sw" style="background:#BBF4E8;color:#16181C"><b>200</b><span>BBF4E8</span></div>
+          <div class="sw" style="background:#84F5E4;color:#16181C"><b>300</b><span>84F5E4</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#4BF1D8;color:#16181C"><b>400</b><span>4BF1D8</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#12EDCC;color:#16181C"><b>500</b><span>12EDCC</span><em title="Derived — see tokens.css for why">◦</em></div>
           <div class="sw" style="background:#0EB59C;color:#16181C"><b>600</b><span>0EB59C</span></div>
-          <div class="sw" style="background:#0CA18B;color:#FFF"><b>700</b><span>0CA18B</span></div>
-          <div class="sw" style="background:#0A7B6A;color:#FFF"><b>800</b><span>0A7B6A</span></div>
-          <div class="sw" style="background:#075549;color:#FFF"><b>900</b><span>075549</span></div>
+          <div class="sw" style="background:#0A9C86;color:#FFF"><b>700</b><span>0A9C86</span></div>
+          <div class="sw" style="background:#0A7B6A;color:#FFF"><b>800</b><span>0A7B6A</span><em title="Derived — see tokens.css for why">◦</em></div>
+          <div class="sw" style="background:#075549;color:#FFF"><b>900</b><span>075549</span><em title="Derived — see tokens.css for why">◦</em></div>
         </div>
       </div>
-
       <div class="ramp">
-        <div class="ramp__label"><b>Neutral</b><span>Text · surfaces · borders</span></div>
+        <div class="ramp__label"><b>Neutral</b><span>Text · surfaces · borders</span><span class="prov">Anchor #4B4B4B at 800 · 10 of 10 from library</span></div>
         <div class="ramp__row">
           <div class="sw" style="background:#F7F7F7;color:#16181C"><b>50</b><span>F7F7F7</span></div>
-          <div class="sw" style="background:#EDEDED;color:#16181C"><b>100</b><span>EDEDED</span></div>
-          <div class="sw" style="background:#DAD8D8;color:#16181C"><b>200</b><span>DAD8D8</span></div>
-          <div class="sw" style="background:#BFBBBB;color:#16181C"><b>300</b><span>BFBBBB</span></div>
-          <div class="sw" style="background:#A19B9B;color:#16181C"><b>400</b><span>A19B9B</span></div>
-          <div class="sw" style="background:#837C7C;color:#FFF"><b>500</b><span>837C7C</span></div>
-          <div class="sw" style="background:#6E6868;color:#FFF"><b>600</b><span>6E6868</span></div>
-          <div class="sw" style="background:#595454;color:#FFF"><b>700</b><span>595454</span></div>
+          <div class="sw" style="background:#EEEEEE;color:#16181C"><b>100</b><span>EEEEEE</span></div>
+          <div class="sw" style="background:#DBDBDB;color:#16181C"><b>200</b><span>DBDBDB</span></div>
+          <div class="sw" style="background:#BABABA;color:#16181C"><b>300</b><span>BABABA</span></div>
+          <div class="sw" style="background:#9F9F9F;color:#FFF"><b>400</b><span>9F9F9F</span></div>
+          <div class="sw" style="background:#7B7C7F;color:#FFF"><b>500</b><span>7B7C7F</span></div>
+          <div class="sw" style="background:#6E6D6D;color:#FFF"><b>600</b><span>6E6D6D</span></div>
+          <div class="sw" style="background:#535353;color:#FFF"><b>700</b><span>535353</span></div>
           <div class="sw" style="background:#4B4B4B;color:#FFF"><b>800</b><span>4B4B4B</span></div>
-          <div class="sw" style="background:#2F2D2D;color:#FFF"><b>900</b><span>2F2D2D</span></div>
+          <div class="sw" style="background:#2B2F32;color:#FFF"><b>900</b><span>2B2F32</span></div>
         </div>
       </div>
 
@@ -329,15 +327,15 @@
           <thead><tr><th>Token</th><th>Purpose</th><th>Contrast</th></tr></thead>
           <tbody>
             <tr><td class="tok">--text-primary</td><td>Body copy, headings, table values</td><td class="num">8.1:1</td></tr>
-            <tr><td class="tok">--text-secondary</td><td>Labels, supporting copy, table headers</td><td class="num">5.5:1</td></tr>
-            <tr><td class="tok">--text-tertiary</td><td>Helper text and timestamps. Never for essential copy.</td><td class="num">4.1:1</td></tr>
-            <tr><td class="tok">--text-link</td><td>Inline links. Must also carry an underline.</td><td class="num">5.9:1</td></tr>
-            <tr><td class="tok">--action-primary-bg</td><td>The one main action on a screen</td><td class="num">5.1:1</td></tr>
-            <tr><td class="tok">--action-danger-bg</td><td>Destructive, irreversible actions only</td><td class="num">7.1:1</td></tr>
+            <tr><td class="tok">--text-secondary</td><td>Labels, supporting copy, table headers</td><td class="num">5.2:1</td></tr>
+            <tr><td class="tok">--text-tertiary</td><td>Helper text and timestamps. Never for essential copy.</td><td class="num">4.3:1</td></tr>
+            <tr><td class="tok">--text-link</td><td>Inline links. Must also carry an underline.</td><td class="num">6.7:1</td></tr>
+            <tr><td class="tok">--action-primary-bg</td><td>The one main action on a screen</td><td class="num">4.9:1</td></tr>
+            <tr><td class="tok">--action-danger-bg</td><td>Destructive, irreversible actions only</td><td class="num">7.6:1</td></tr>
             <tr><td class="tok">--action-accent-bg</td><td>Back-office primary, selection, focus</td><td class="num">4.6:1</td></tr>
             <tr><td class="tok">--border-interactive</td><td>Input and control borders</td><td class="num">4.1:1</td></tr>
             <tr><td class="tok">--border-subtle</td><td>Decorative dividers only — carries no meaning</td><td class="num">—</td></tr>
-            <tr><td class="tok">--feedback-*-bg / -fg</td><td>Success, warning, danger, info surfaces</td><td class="num">6.5:1+</td></tr>
+            <tr><td class="tok">--feedback-*-bg / -fg</td><td>Success, warning, danger, info surfaces</td><td class="num">6.9:1+</td></tr>
           </tbody>
         </table>
       </div>
@@ -646,7 +644,7 @@
         <span class="note__label">Why the primary button lightens on hover</span>
         <p>The brand green is a light hue, so its label is dark. Darkening the background on hover
         would push the label below 4.5:1 — so the interaction ramp moves the other way. Rest, hover
-        and pressed measure 5.1:1, 6.0:1 and 7.0:1 respectively: contrast <em>improves</em> as the
+        and pressed measure 4.9:1, 6.4:1 and 6.9:1 respectively: contrast <em>improves</em> as the
         user engages.</p>
       </div>
 
@@ -871,7 +869,12 @@
     <section class="doc" id="choice">
       <h2>Checkbox &amp; radio</h2>
       <p>Checkboxes select any number of independent options. Radios select exactly one from a set —
-      and a set always has a default.</p>
+      and a set always has a default. Both use <code>--selection-bg</code>, bound to the product
+      green rather than the back-office blue.</p>
+      <div class="note"><span class="note__label">Why the tick is dark, not white</span>
+      <p>A white mark on the brand green measures 2.56:1 and fails. The selected state uses a
+      <code>green-900</code> mark on <code>green-500</code> at 4.91:1 — the same dark-on-light rule
+      the primary button follows, for the same reason.</p></div>
 
       <div class="canvas">
         <div class="canvas__stage" style="gap:var(--space-6)">

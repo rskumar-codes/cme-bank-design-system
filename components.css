@@ -43,7 +43,7 @@
   height: var(--control-md);
   padding: 0 var(--space-3);
   border: var(--border-width-thin) solid transparent;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-12);
   font-family: inherit;
   font-size: var(--size-14);
   font-weight: var(--weight-semibold);
@@ -211,13 +211,13 @@
 .cme-checkbox.is-checked .cme-checkbox__box,
 .cme-radio input:checked + .cme-radio__dot,
 .cme-radio.is-checked .cme-radio__dot {
-  background: var(--action-accent-bg);
-  border-color: var(--action-accent-bg);
+  background: var(--selection-bg);
+  border-color: var(--selection-border);
 }
 .cme-checkbox__box::after {
   content: ""; width: 9px; height: 5px;
-  border-left: 2px solid var(--action-accent-fg);
-  border-bottom: 2px solid var(--action-accent-fg);
+  border-left: 2px solid var(--selection-fg);
+  border-bottom: 2px solid var(--selection-fg);
   transform: rotate(-45deg) translate(1px, -1px);
   opacity: 0;
 }
@@ -225,7 +225,7 @@
 .cme-checkbox.is-checked .cme-checkbox__box::after { opacity: 1; }
 .cme-radio__dot::after {
   content: ""; width: 6px; height: 6px; border-radius: var(--radius-full);
-  background: var(--action-accent-fg); opacity: 0;
+  background: var(--selection-fg); opacity: 0;
 }
 .cme-radio input:checked + .cme-radio__dot::after,
 .cme-radio.is-checked .cme-radio__dot::after { opacity: 1; }
@@ -251,7 +251,7 @@
   transition: transform .12s ease;
 }
 .cme-switch input:checked + .cme-switch__track,
-.cme-switch.is-checked .cme-switch__track { background: var(--action-accent-bg); }
+.cme-switch.is-checked .cme-switch__track { background: var(--selection-bg); }
 .cme-switch input:checked + .cme-switch__track::after,
 .cme-switch.is-checked .cme-switch__track::after { transform: translateX(16px); }
 
@@ -327,7 +327,7 @@
 }
 .cme-table tr:last-child td { border-bottom: 0; }
 .cme-table tbody tr:hover { background: var(--table-row-hover); }
-.cme-table tr.is-selected { background: var(--table-row-selected); box-shadow: inset 2px 0 0 var(--action-accent-bg); }
+.cme-table tr.is-selected { background: var(--table-row-selected); box-shadow: inset 2px 0 0 var(--selection-border); }
 .cme-table .is-numeric { text-align: right; font-variant-numeric: tabular-nums; }
 .cme-table--dense td { padding: var(--space-2) var(--space-4); }
 

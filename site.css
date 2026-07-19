@@ -183,6 +183,11 @@ table.spec strong { color: var(--text-primary); }
 .ramp__label { display: flex; gap: var(--space-3); align-items: baseline; margin-bottom: var(--space-2); font-family: var(--font-mono); font-size: var(--size-12); }
 .ramp__label b { text-transform: uppercase; letter-spacing: var(--track-loose); color: var(--text-primary); }
 .ramp__label span { color: var(--text-tertiary); font-size: var(--size-11); }
+.ramp__label .prov { margin-left: auto; font-size: var(--size-11); opacity: .85; }
+.sw em { font-style: normal; font-size: 11px; line-height: 1; opacity: .55; margin-top: 2px; }
+.legend { font-size: var(--size-12); color: var(--text-tertiary); max-width: 68ch; margin-bottom: var(--space-5); }
+.legend b { color: var(--text-primary); }
+.legend em { font-style: normal; opacity: .6; }
 .ramp__row { display: grid; grid-template-columns: repeat(10, 1fr); border-radius: var(--radius-md); overflow: hidden; }
 @media (max-width: 700px) { .ramp__row { grid-template-columns: repeat(5, 1fr); } }
 .sw { aspect-ratio: 1 / 1.1; padding: var(--space-2); display: flex; flex-direction: column; justify-content: flex-end; font-family: var(--font-mono); font-size: 10px; line-height: 1.3; }
