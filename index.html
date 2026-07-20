@@ -74,7 +74,9 @@
       <div class="nav-group__title">Components</div>
       <ul>
         <li><a href="#button">Button</a></li>
-        <li><a href="#input">Text input</a></li>
+        <li><a href="#float">Field (floating)</a></li>
+        <li><a href="#input">Field (bordered)</a></li>
+        <li><a href="#upload">File upload</a></li>
         <li><a href="#select">Select</a></li>
         <li><a href="#choice">Checkbox &amp; radio</a></li>
         <li><a href="#switch">Switch</a></li>
@@ -796,11 +798,125 @@
       </div>
     </section>
 
+
+    <!-- ═════════════ FLOATING FIELD ═════════════ -->
+    <section class="doc" id="float">
+      <h2>Field — floating label</h2>
+      <p>The customer portal's field. The label starts as the placeholder and rises when the field is
+      focused or filled, so the field never loses its label. Measurements come from the
+      <code>yup-comp: textinput</code> component: 14px resting label at 40% opacity, 10px SemiBold at
+      80% once floated, 14px value, 44px tall.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage" style="align-items:flex-start;gap:var(--space-5)">
+          <div style="min-width:230px">
+            <label class="cme-float">
+              <input class="cme-float__input" type="text" placeholder=" ">
+              <span class="cme-float__label">Phone Number<span class="cme-float__required">*</span></span>
+            </label>
+          </div>
+          <div style="min-width:230px">
+            <label class="cme-float">
+              <input class="cme-float__input" type="text" placeholder=" " value="+597 812 4471">
+              <span class="cme-float__label">Phone Number<span class="cme-float__required">*</span></span>
+            </label>
+          </div>
+        </div>
+        <div class="canvas__code">&lt;label class="cme-float"&gt;
+  &lt;input class="cme-float__input" type="text" placeholder=" "&gt;
+  &lt;span class="cme-float__label"&gt;Phone Number&lt;/span&gt;
+&lt;/label&gt;</div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">placeholder=" " is required, not optional</span>
+        <p>The label floats using <code>:placeholder-shown</code>, which is how CSS knows the field is
+        empty. The input needs <code>placeholder=" "</code> — a single space. Omit it and the label
+        never rises. No JavaScript is involved.</p>
+      </div>
+
+      <h3 class="sub">States</h3>
+      <div class="canvas">
+        <div class="canvas__stage" style="align-items:flex-start;gap:var(--space-5)">
+          <div style="min-width:200px">
+            <div class="matrix__label" style="margin-bottom:var(--space-2)">Rest</div>
+            <label class="cme-float"><input class="cme-float__input" placeholder=" "><span class="cme-float__label">Full name</span></label>
+          </div>
+          <div style="min-width:200px">
+            <div class="matrix__label" style="margin-bottom:var(--space-2)">Filled</div>
+            <label class="cme-float"><input class="cme-float__input" placeholder=" " value="Priya Raman"><span class="cme-float__label">Full name</span></label>
+          </div>
+          <div style="min-width:220px">
+            <div class="matrix__label" style="margin-bottom:var(--space-2)">Error</div>
+            <label class="cme-float is-error"><input class="cme-float__input" placeholder=" " value="pr@" aria-invalid="true"><span class="cme-float__label">Email address</span></label>
+            <span class="cme-field__error" style="margin-top:var(--space-1)">Enter an address like name@example.com</span>
+          </div>
+          <div style="min-width:200px">
+            <div class="matrix__label" style="margin-bottom:var(--space-2)">Disabled</div>
+            <label class="cme-float is-disabled"><input class="cme-float__input" placeholder=" " value="Locked" disabled><span class="cme-float__label">Account type</span></label>
+          </div>
+          <div style="min-width:250px">
+            <div class="matrix__label" style="margin-bottom:var(--space-2)">Read-only</div>
+            <label class="cme-float cme-float--readonly"><input class="cme-float__input" placeholder=" " value="GB29 NWBK 6016 1331 9268 19" readonly><span class="cme-float__label">Account number</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">One deliberate deviation from the Figma design</span>
+        <p>The design is fully borderless. A control with no visible boundary fails
+        <strong>WCAG 1.4.11</strong>, which requires 3:1 contrast on the edge of an input — a low-vision
+        user cannot find the field. A 1px underline at <code>--field-underline</code> (4.30:1) is the
+        smallest change that satisfies it while keeping the open, boxless look. Set that token to
+        <code>transparent</code> to restore the pure design; the component still works, but no longer
+        meets 1.4.11.</p>
+      </div>
+
+      <h3 class="sub">Composed — country code and number</h3>
+      <div class="canvas">
+        <div class="canvas__stage">
+          <div class="cme-field-row" style="min-width:320px">
+            <label class="cme-float cme-float--select" style="width:130px">
+              <input class="cme-float__input" placeholder=" " value="+597" readonly>
+              <span class="cme-float__label">Country</span>
+              <svg class="cme-float__chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </label>
+            <label class="cme-float" style="flex:1">
+              <input class="cme-float__input" placeholder=" " value="812 4471">
+              <span class="cme-float__label">Phone Number<span class="cme-float__required">*</span></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Always pass <code>placeholder=" "</code> so the label can float.</li>
+            <li>Use this field throughout the customer portal.</li>
+            <li>Keep labels short — they must fit at 14px in the resting position.</li>
+            <li>Put the error message below the field, never inside it.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't use a real placeholder as a hint — that slot belongs to the label.</li>
+            <li>Don't use this field in the back-office; it uses the bordered field.</li>
+            <li>Don't remove the underline without accepting the 1.4.11 failure.</li>
+            <li>Don't slow the float past the built-in 140ms — it reads as lag.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- ═════════════ TEXT INPUT ═════════════ -->
     <section class="doc" id="input">
-      <h2>Text input</h2>
-      <p>Collects a single line of text. Always paired with a visible label — the placeholder is a
-      hint, never a substitute.</p>
+      <h2>Field — bordered</h2>
+      <p>The back-office field, from the <code>bo_input_field</code> component. Denser than the
+      customer field and boxed, because back-office screens pack many inputs into a grid where an
+      explicit boundary reads faster than a floating label.</p>
 
       <div class="canvas">
         <div class="canvas__stage">
@@ -901,6 +1017,126 @@
             <tr><td>Error</td><td><code>aria-invalid="true"</code> and <code>aria-describedby</code> pointing at the message.</td></tr>
             <tr><td>Announcement</td><td>Wrap the error in <code>role="alert"</code> so it is read when it appears.</td></tr>
             <tr><td>Helper</td><td>Link with <code>aria-describedby</code> — visual proximity is not enough.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <!-- ═════════════ FILE UPLOAD ═════════════ -->
+    <section class="doc" id="upload">
+      <h2>File upload</h2>
+      <p>Extracted from the <code>bo_file_upload</code> component. A dashed drop zone with explicit
+      Browse and Take photo actions, the accepted formats stated up front, and four states.</p>
+
+      <div class="canvas">
+        <div class="canvas__stage canvas__stage--stack">
+          <div class="cme-upload">
+            <div class="cme-upload__label">Proof of address</div>
+            <div class="cme-upload__zone">
+              <div class="cme-upload__prompt">Drag and drop or browse your file</div>
+              <div class="cme-upload__actions">
+                <button class="cme-btn cme-btn--secondary cme-btn--sm"><svg class="cme-btn__icon" aria-hidden="true"><use href="#i-doc"/></svg> Browse</button>
+                <button class="cme-btn cme-btn--secondary cme-btn--sm"><svg class="cme-btn__icon" aria-hidden="true"><use href="#i-user"/></svg> Take photo</button>
+              </div>
+            </div>
+            <div class="cme-upload__meta">Accepted: PDF, JPG/JPEG, PNG, SVG, GIF, CSV, XLS, DOCX. Max file size 200KB.</div>
+            <div class="cme-upload__note"><svg width="14" height="14" aria-hidden="true"><use href="#i-info"/></svg> Expiry date should be at least 3 months from today.</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">Filled</h3>
+      <div class="canvas">
+        <div class="canvas__stage canvas__stage--stack">
+          <div class="cme-upload">
+            <div class="cme-upload__label">Proof of address</div>
+            <div class="cme-upload__zone">
+              <div class="cme-upload__prompt">Drag and drop or browse your file</div>
+              <div class="cme-upload__actions">
+                <button class="cme-btn cme-btn--secondary cme-btn--sm"><svg class="cme-btn__icon" aria-hidden="true"><use href="#i-doc"/></svg> Browse</button>
+                <button class="cme-btn cme-btn--secondary cme-btn--sm"><svg class="cme-btn__icon" aria-hidden="true"><use href="#i-user"/></svg> Take photo</button>
+              </div>
+              <div class="cme-upload__files">
+                <div class="cme-file">
+                  <button class="cme-file__remove" aria-label="Remove Upload-Doc1.jpg"><svg width="10" height="10" aria-hidden="true"><use href="#i-x"/></svg></button>
+                  <div class="cme-file__thumb">JPG</div>
+                  <div class="cme-file__name">Upload-Doc1.jpg</div>
+                </div>
+                <div class="cme-file">
+                  <button class="cme-file__remove" aria-label="Remove Upload-Doc2.jpg"><svg width="10" height="10" aria-hidden="true"><use href="#i-x"/></svg></button>
+                  <div class="cme-file__thumb">JPG</div>
+                  <div class="cme-file__name">Upload-Doc2.jpg</div>
+                </div>
+                <div class="cme-file">
+                  <button class="cme-file__remove" aria-label="Remove Statement.pdf"><svg width="10" height="10" aria-hidden="true"><use href="#i-x"/></svg></button>
+                  <div class="cme-file__thumb">PDF</div>
+                  <div class="cme-file__name">Statement.pdf</div>
+                </div>
+              </div>
+            </div>
+            <div class="cme-upload__meta">3 files attached · 148KB of 200KB used.</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">Error and disabled</h3>
+      <div class="canvas">
+        <div class="canvas__stage canvas__stage--stack">
+          <div class="cme-upload is-error">
+            <div class="cme-upload__label">Proof of address</div>
+            <div class="cme-upload__zone">
+              <div class="cme-upload__prompt">Drag and drop or browse your file</div>
+              <div class="cme-upload__actions">
+                <button class="cme-btn cme-btn--secondary cme-btn--sm"><svg class="cme-btn__icon" aria-hidden="true"><use href="#i-doc"/></svg> Browse</button>
+              </div>
+            </div>
+            <div class="cme-upload__note" role="alert"><svg width="14" height="14" aria-hidden="true"><use href="#i-alert"/></svg> That file is 240KB. Compress it below 200KB and try again.</div>
+          </div>
+          <div class="cme-upload is-disabled">
+            <div class="cme-upload__label">Proof of income</div>
+            <div class="cme-upload__zone">
+              <div class="cme-upload__prompt">Drag and drop or browse your file</div>
+              <div class="cme-upload__actions">
+                <button class="cme-btn cme-btn--secondary cme-btn--sm" disabled><svg class="cme-btn__icon" aria-hidden="true"><use href="#i-doc"/></svg> Browse</button>
+              </div>
+            </div>
+            <div class="cme-upload__meta">Available once your address is verified.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>State accepted formats and the size limit before the user picks a file.</li>
+            <li>Keep a real <code>&lt;button&gt;</code> for Browse — drag and drop is never the only route.</li>
+            <li>Name the file in the remove button's <code>aria-label</code>.</li>
+            <li>Say what to do when a file is rejected, with the actual limit.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't make drag and drop the only way to upload — it is unusable by keyboard.</li>
+            <li>Don't show a bare "Invalid file" error; give the size or format that failed.</li>
+            <li>Don't hide the accepted formats behind a tooltip.</li>
+            <li>Don't remove a file without a confirmation or an undo.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub">Accessibility</h3>
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Requirement</th><th>Implementation</th></tr></thead>
+          <tbody>
+            <tr><td>Keyboard</td><td>Browse is a real button wrapping a visually hidden <code>&lt;input type="file"&gt;</code>.</td></tr>
+            <tr><td>Drop zone focus</td><td>Zone shows a solid border and a focus ring via <code>:focus-within</code>.</td></tr>
+            <tr><td>Remove buttons</td><td>Each carries <code>aria-label</code> naming its file, not just "Remove".</td></tr>
+            <tr><td>Errors</td><td>Wrapped in <code>role="alert"</code> so they announce on appearance.</td></tr>
+            <tr><td>Progress</td><td>Announce upload completion through a polite live region.</td></tr>
           </tbody>
         </table>
       </div>

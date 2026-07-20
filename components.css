@@ -357,3 +357,201 @@
 [data-portal="backoffice"] .cme-checkbox,
 [data-portal="backoffice"] .cme-radio,
 [data-portal="backoffice"] .cme-switch     { font-size: var(--size-12); }
+
+/* ==========================================================================
+   FLOATING-LABEL FIELD  —  customer portal
+   --------------------------------------------------------------------------
+   Extracted from the CompLib `yup-comp: textinput` component. Measurements
+   are the design's own:
+
+     container      12px horizontal padding
+     resting label  14px Open Sans Regular, dark-gray at 40%, vertically centred
+     floated label  10px Open Sans SemiBold, dark-gray at 80%, at the top
+     value          14px Open Sans Regular, dark-gray at 100%
+     line-height    1.5 throughout
+     height         44px  (12 + 4 padding + 15 label + 21 value ≈ 44)
+
+   The label floats on focus OR when the field has a value. That needs no
+   JavaScript: :placeholder-shown tells us whether the field is empty, so the
+   markup must carry placeholder=" " (a single space).
+
+   ONE DEVIATION FROM THE DESIGN — see --field-underline in tokens.css.
+   The design is fully borderless; a 1px underline is added so the control
+   has a findable boundary (WCAG 1.4.11).
+   ========================================================================== */
+.cme-float {
+  position: relative;
+  display: block;
+  padding: 0 var(--space-3);
+  height: var(--control-height);
+  border-bottom: var(--border-width-thin) solid var(--field-underline);
+  background: transparent;
+  transition: border-color .12s ease;
+}
+.cme-float:hover:not(.is-disabled) { border-bottom-color: var(--field-underline-hover); }
+
+.cme-float__input {
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: 4px;
+  width: calc(100% - var(--space-3) * 2);
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--size-14);
+  line-height: var(--lh-body);
+  color: var(--field-value);
+  outline: none;
+}
+/* The label is the placeholder when empty, and the label when not. */
+.cme-float__label {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--size-14);
+  line-height: var(--lh-body);
+  font-weight: var(--weight-regular);
+  color: var(--field-placeholder);
+  pointer-events: none;
+  transition: top .14s ease, transform .14s ease, font-size .14s ease, color .14s ease;
+}
+/* Driven by :focus-within on the container rather than :focus on the input.
+   A sibling combinator off :focus is fragile — it fails wherever the input
+   holds focus but the pseudo-class does not resolve on the sibling chain.
+   :focus-within on the parent is unambiguous and covers the same case. */
+.cme-float:focus-within .cme-float__label,
+.cme-float__input:not(:placeholder-shown) ~ .cme-float__label {
+  top: 4px;
+  transform: translateY(0);
+  font-size: 10px;
+  font-weight: var(--weight-semibold);
+  color: var(--field-label);
+}
+.cme-float__required { color: var(--feedback-danger-fg); }
+
+/* Focus lands on the underline, not a ring — the field has no box to ring. */
+.cme-float:focus-within {
+  border-bottom-width: var(--border-width-focus);
+  border-bottom-color: var(--border-focus);
+}
+.cme-float.is-error { border-bottom-color: var(--field-underline-error); }
+.cme-float.is-error .cme-float__label { color: var(--feedback-danger-fg); }
+.cme-float.is-disabled { border-bottom-style: dashed; border-bottom-color: var(--border-subtle); }
+.cme-float.is-disabled .cme-float__label,
+.cme-float.is-disabled .cme-float__input { color: var(--text-disabled); }
+
+/* Read-only: no underline at all — the value is not editable, ever. */
+.cme-float--readonly { border-bottom-color: transparent; }
+.cme-float--readonly .cme-float__input { font-weight: var(--weight-semibold); }
+
+/* Trailing affordance — chevron for the select variant */
+.cme-float--select .cme-float__input { padding-right: var(--space-5); }
+.cme-float__chevron {
+  position: absolute; right: var(--space-3); top: 50%;
+  transform: translateY(-50%);
+  width: var(--icon-sm); height: var(--icon-sm);
+  color: var(--field-value); pointer-events: none;
+}
+
+/* Leading slot — country flag, currency symbol */
+.cme-float__lead {
+  position: absolute; left: var(--space-3); bottom: 4px;
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--size-14); line-height: var(--lh-body);
+  color: var(--field-value); pointer-events: none;
+}
+.cme-float--lead .cme-float__input { padding-left: var(--space-6); }
+
+/* Composed row — country code beside phone number, divided as in the design */
+.cme-field-row { display: flex; align-items: stretch; }
+.cme-field-row > .cme-float + .cme-float { border-left: var(--border-width-thin) solid var(--border-subtle); }
+
+/* ==========================================================================
+   FILE UPLOAD
+   --------------------------------------------------------------------------
+   Extracted from the CompLib `bo_file_upload` component. Four states:
+   default, filled, error, disabled.
+   ========================================================================== */
+.cme-upload { display: flex; flex-direction: column; gap: var(--space-2); }
+.cme-upload__label {
+  font-size: var(--size-14);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+}
+.cme-upload__zone {
+  border: var(--border-width-thin) dashed var(--upload-border);
+  background: var(--upload-bg);
+  border-radius: var(--radius-container);
+  padding: var(--space-6) var(--space-5);
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-4);
+  text-align: center;
+  transition: background-color .12s ease, border-color .12s ease;
+}
+.cme-upload__zone:focus-within {
+  border-color: var(--border-focus);
+  border-style: solid;
+  outline: var(--border-width-focus) solid var(--border-focus);
+  outline-offset: 2px;
+}
+.cme-upload__prompt {
+  font-size: var(--size-12);
+  letter-spacing: var(--track-loose);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.cme-upload__actions { display: flex; gap: var(--space-3); flex-wrap: wrap; justify-content: center; }
+.cme-upload__meta { font-size: var(--size-11); color: var(--text-tertiary); }
+.cme-upload__note {
+  display: flex; align-items: flex-start; gap: var(--space-2);
+  font-size: var(--size-11); color: var(--text-tertiary);
+}
+.cme-upload__note svg { flex: none; margin-top: 1px; }
+
+.cme-upload.is-error .cme-upload__zone {
+  border-color: var(--upload-border-error);
+  background: var(--upload-bg-error);
+}
+.cme-upload.is-error .cme-upload__note { color: var(--feedback-danger-fg); }
+
+.cme-upload.is-disabled .cme-upload__zone {
+  border-color: var(--upload-border-disabled);
+  background: var(--upload-bg-disabled);
+}
+.cme-upload.is-disabled .cme-upload__prompt,
+.cme-upload.is-disabled .cme-upload__meta { color: var(--text-disabled); }
+
+/* Uploaded files */
+.cme-upload__files { display: flex; gap: var(--space-4); flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+.cme-file {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-1);
+  width: 68px;
+}
+.cme-file__thumb {
+  width: 40px; height: 46px;
+  border: var(--border-width-thin) solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  display: grid; place-items: center;
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+.cme-file__name {
+  font-size: var(--size-11); color: var(--text-secondary);
+  line-height: 1.3; word-break: break-word; text-align: center;
+}
+.cme-file__remove {
+  position: absolute; top: -6px; right: 8px;
+  width: 18px; height: 18px;
+  border: 0; border-radius: var(--radius-sm);
+  background: var(--action-danger-bg); color: var(--action-danger-fg);
+  display: grid; place-items: center; cursor: pointer; padding: 0;
+}
+.cme-file__remove:focus-visible {
+  outline: var(--border-width-focus) solid var(--border-focus);
+  outline-offset: 2px;
+}

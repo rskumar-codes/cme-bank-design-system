@@ -249,6 +249,28 @@
   --field-bg-error:    var(--red-50);
   --field-border:      var(--border-interactive);
 
+  /* Floating-label field (customer portal).
+     The Figma design is fully borderless. A control with no visible boundary
+     fails WCAG 1.4.11, which requires 3:1 for the edge of an input — a
+     sighted low-vision user cannot find the field. A 1px underline is the
+     smallest addition that satisfies it while keeping the open, boxless look.
+     Set --field-underline to transparent to restore the pure design; the
+     component still works, but it no longer meets 1.4.11. */
+  --field-underline:          var(--border-interactive);  /* 4.30:1 */
+  --field-underline-hover:    var(--border-strong);
+  --field-underline-error:    var(--feedback-danger-border);
+  --field-label:              rgba(75, 75, 75, 0.8);   /* from library: dark-gray/80 */
+  --field-placeholder:        rgba(75, 75, 75, 0.4);   /* from library: dark-gray/40 */
+  --field-value:              var(--neutral-800);      /* from library: dark-gray/100 */
+
+  /* File upload drop zone */
+  --upload-border:          var(--action-primary-bg);
+  --upload-bg:              var(--surface-raised);
+  --upload-border-error:    var(--feedback-danger-border);
+  --upload-bg-error:        var(--feedback-danger-bg);
+  --upload-border-disabled: var(--border-subtle);
+  --upload-bg-disabled:     var(--surface-sunken);
+
   --table-header-bg:    var(--neutral-50);
   --table-row-hover:    var(--neutral-50);
   --table-row-selected: var(--selection-subtle);
@@ -274,6 +296,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    --field-label:       rgba(237, 237, 237, 0.85);
+    --field-placeholder: rgba(237, 237, 237, 0.45);
+    --field-value:       var(--neutral-100);
     --surface-canvas:  var(--neutral-950);
     --surface-raised:  var(--neutral-900);
     --surface-sunken:  var(--neutral-1000);
@@ -339,6 +364,9 @@
 
 /* Explicit theme selection always wins over the OS preference. */
 :root[data-theme="dark"] {
+  --field-label:       rgba(237, 237, 237, 0.85);
+  --field-placeholder: rgba(237, 237, 237, 0.45);
+  --field-value:       var(--neutral-100);
   --surface-canvas:  var(--neutral-950);
   --surface-raised:  var(--neutral-900);
   --surface-sunken:  var(--neutral-1000);
