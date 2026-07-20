@@ -21,6 +21,10 @@ cme-bank-design-system/
 **`tokens.css` is the source of truth.** `tokens.json` is generated from it, never edited by hand.
 If you change a value, change it there and re-run the build.
 
+Every colour primitive carries its provenance inline — `[file]` means the hex already existed in the
+CompLib Figma library, `[derived]` means it was interpolated because the library had no usable colour
+at that lightness, with the reason stated. **42 of 63 steps come from the library.**
+
 ---
 
 ## Running it locally
@@ -115,6 +119,51 @@ Dark mode follows the OS automatically. To override:
 <html data-theme="light">   <!-- force light -->
 <html>                      <!-- follow the OS -->
 ```
+
+---
+
+## Two portals, one component set
+
+CME Bank runs two products from this library. They are **not** two component sets — they are the same
+components under two brand themes, switched with one attribute:
+
+```html
+<body data-portal="customer">     <!-- green, Open Sans, roomy, 12px radius -->
+<body data-portal="backoffice">   <!-- blue, Roboto, dense, 4px radius -->
+```
+
+|  | Customer portal | Back-office portal |
+|---|---|---|
+| Brand | `green-500` `#9CC53E` | `blue-400` `#376EEC` |
+| Label on brand | `green-900` — dark | white |
+| Typeface | Open Sans | Roboto |
+| Control height | 44px — touch-ready | 36px — dense |
+| Radius | 12px — soft | 4px — tight |
+| Base type | 14px | 12px |
+
+Portal composes with light/dark independently: **2 portals × 2 modes = 4 combinations, one component
+set.** All 24 foreground/background pairs across those four combinations are verified.
+
+### Why the label colour flips
+
+The customer green is a *light* hue, so its label must be dark — white on it measures 2.56:1 and
+fails. The back-office blue is *dark* enough to carry white at 4.56:1. `--action-primary-fg` absorbs
+the difference, so the button component never knows which portal it is in.
+
+### Adding a portal difference
+
+Put it in the portal block in `tokens.css`, never in a component:
+
+```css
+[data-portal="backoffice"] {
+  --radius-control: var(--radius-md);
+  --action-primary-bg: var(--blue-400);
+}
+```
+
+**Never fork a component to theme it.** That is how the original library ended up with five parallel
+button implementations. If a component needs to differ between portals, the difference belongs in a
+token.
 
 ---
 

@@ -257,6 +257,12 @@
   --elevation-raised:  0 1px 3px rgba(19,18,18,.10);
   --elevation-overlay: 0 4px 12px rgba(19,18,18,.14);
   --elevation-modal:   0 8px 32px rgba(19,18,18,.20);
+
+  /* Portal defaults — customer. Overridden by [data-portal] below. */
+  --font-family:      var(--font-product);
+  --radius-control:   var(--radius-12);
+  --radius-container: var(--radius-lg);
+  --control-height:   var(--control-lg);
 }
 
 
@@ -394,3 +400,129 @@
   --elevation-overlay: 0 4px 12px rgba(0,0,0,.50);
   --elevation-modal:   0 8px 32px rgba(0,0,0,.60);
 }
+
+/* ==========================================================================
+   TIER 2b — PORTAL THEMES
+   --------------------------------------------------------------------------
+   CME Bank runs two products from one component library. They differ in four
+   ways, and all four live here:
+
+     brand      customer = green,  back-office = blue
+     typeface   customer = Open Sans,  back-office = Roboto
+     density    customer = roomy (44px controls),  back-office = dense (36px)
+     radius     customer = 12px (soft),  back-office = 4px (tight)
+
+   There is ONE set of components. Scope a portal with data-portal:
+
+     <body data-portal="customer">      <!-- default if omitted -->
+     <body data-portal="backoffice">
+
+   Portal composes with light/dark independently: 2 portals x 2 modes = 4
+   combinations, from one component set. Never fork a component to theme it.
+
+   Note the brand foreground flips between portals and this is deliberate:
+   the customer green is a LIGHT hue so its label is dark (white fails at
+   2.56:1), while the back-office blue is DARK enough to carry white at
+   4.56:1. The token absorbs the difference so components never know.
+   ========================================================================== */
+
+/* ── Portal: CUSTOMER — also the :root default above ─────────────────── */
+[data-portal="customer"] {
+  --font-family:       var(--font-product);
+  --radius-control:    var(--radius-12);   /* 12px — soft, consumer-facing */
+  --radius-container:  var(--radius-lg);
+  --control-height:    var(--control-lg);  /* 44px — comfortable, touch-ready */
+
+  --action-primary-bg:          var(--green-500);  /* 4.91:1 with fg */
+  --action-primary-bg-hover:    var(--green-400);  /* 6.39:1 */
+  --action-primary-bg-pressed:  var(--green-300);  /* 6.89:1 */
+  --action-primary-bg-disabled: var(--green-100);
+  --action-primary-fg:          var(--green-900);  /* DARK on light green */
+  --action-primary-fg-disabled: var(--green-700);
+
+  --selection-bg:       var(--green-500);  /* 4.91:1 with fg */
+  --selection-bg-hover: var(--green-400);
+  --selection-fg:       var(--green-900);
+  --selection-subtle:   var(--green-50);
+  --selection-border:   var(--green-600);
+
+  --text-link:    var(--green-800);  /* 6.18:1 on raised */
+  --border-focus: var(--green-700);  /* 3.75:1 on canvas */
+}
+
+/* ── Portal: BACK-OFFICE ─────────────────────────────────────────────── */
+[data-portal="backoffice"] {
+  --font-family:       var(--font-backoffice);
+  --radius-control:    var(--radius-md);   /* 4px — tight, information-dense */
+  --radius-container:  var(--radius-md);
+  --control-height:    var(--control-md);  /* 36px — dense, pointer-first */
+
+  --action-primary-bg:          var(--blue-400);  /* 4.56:1 with white */
+  --action-primary-bg-hover:    var(--blue-500);  /* 5.79:1 */
+  --action-primary-bg-pressed:  var(--blue-600);  /* 6.44:1 */
+  --action-primary-bg-disabled: var(--neutral-200);
+  --action-primary-fg:          var(--neutral-0); /* WHITE on dark blue */
+  --action-primary-fg-disabled: var(--neutral-400);
+
+  --selection-bg:       var(--blue-400);   /* 4.56:1 with fg */
+  --selection-bg-hover: var(--blue-500);
+  --selection-fg:       var(--neutral-0);
+  --selection-subtle:   var(--blue-50);
+  --selection-border:   var(--blue-400);
+
+  --text-link:    var(--blue-500);  /* 5.79:1 on raised */
+  --border-focus: var(--blue-400);  /* 4.26:1 on canvas */
+}
+
+/* Portal brand in dark mode — OS preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-portal="customer"],
+  :root:not([data-theme="light"])[data-portal="customer"] {
+    --action-primary-bg:          var(--green-400);  /* 6.39:1 */
+    --action-primary-bg-hover:    var(--green-300);  /* 6.89:1 */
+    --action-primary-bg-pressed:  var(--green-200);  /* 7.80:1 */
+    --action-primary-bg-disabled: var(--neutral-800);
+    --action-primary-fg-disabled: var(--neutral-600);
+    --selection-bg:       var(--green-400);
+    --selection-bg-hover: var(--green-300);
+    --selection-subtle:   var(--green-900);
+    --selection-border:   var(--green-400);
+    --text-link:    var(--green-300);  /* 9.43:1 */
+    --border-focus: var(--green-400);  /* 10.78:1 */
+  }
+  :root:not([data-theme="light"]) [data-portal="backoffice"],
+  :root:not([data-theme="light"])[data-portal="backoffice"] {
+    --action-primary-bg-disabled: var(--neutral-800);
+    --action-primary-fg-disabled: var(--neutral-600);
+    --selection-subtle: var(--blue-900);
+    --text-link:    var(--blue-300);  /* 5.68:1 */
+    --border-focus: var(--blue-300);  /* 7.00:1 */
+  }
+}
+
+/* Portal brand in dark mode — explicit choice, must win over the media query */
+:root[data-theme="dark"] [data-portal="customer"],
+:root[data-theme="dark"][data-portal="customer"] {
+  --action-primary-bg:          var(--green-400);
+  --action-primary-bg-hover:    var(--green-300);
+  --action-primary-bg-pressed:  var(--green-200);
+  --action-primary-bg-disabled: var(--neutral-800);
+  --action-primary-fg-disabled: var(--neutral-600);
+  --selection-bg:       var(--green-400);
+  --selection-bg-hover: var(--green-300);
+  --selection-subtle:   var(--green-900);
+  --selection-border:   var(--green-400);
+  --text-link:    var(--green-300);
+  --border-focus: var(--green-400);
+}
+:root[data-theme="dark"] [data-portal="backoffice"],
+:root[data-theme="dark"][data-portal="backoffice"] {
+  --action-primary-bg-disabled: var(--neutral-800);
+  --action-primary-fg-disabled: var(--neutral-600);
+  --selection-subtle: var(--blue-900);
+  --text-link:    var(--blue-300);
+  --border-focus: var(--blue-300);
+}
+
+/* The scope element carries the portal typeface. */
+[data-portal] { font-family: var(--font-family); }

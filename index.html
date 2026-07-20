@@ -26,7 +26,7 @@
   <symbol id="i-trash" viewBox="0 0 20 20"><path d="M4 6h12M8 6V4h4v2M6 6l.8 11h6.4L14 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
-<div class="docs">
+<div class="docs" id="docsRoot" data-portal="customer">
 
   <!-- ══════════════ SIDEBAR ══════════════ -->
   <nav class="sidebar" aria-label="Documentation">
@@ -37,9 +37,15 @@
     </div>
 
     <label class="theme-toggle">
-      <input type="checkbox" id="themeSwitch" style="accent-color:var(--action-accent-bg)">
+      <input type="checkbox" id="themeSwitch" style="accent-color:var(--selection-bg)">
       Dark mode
     </label>
+
+    <div class="portal-switch">
+      <div class="portal-switch__label">Portal</div>
+      <label><input type="radio" name="portal" value="customer" checked> Customer</label>
+      <label><input type="radio" name="portal" value="backoffice"> Back-office</label>
+    </div>
 
     <div style="height:var(--space-4)"></div>
 
@@ -49,6 +55,7 @@
         <li><a href="#overview">Overview</a></li>
         <li><a href="#install">Getting started</a></li>
         <li><a href="#architecture">Token architecture</a></li>
+        <li><a href="#portals">Portals</a></li>
       </ul>
     </div>
 
@@ -216,6 +223,98 @@
             <li>Don't write a hex value in product code — if it isn't a token, it isn't approved.</li>
             <li>Don't create a component token that merely aliases a semantic one.</li>
             <li>Don't encode a location in a name — <code>--header-button-bg</code> won't survive a redesign.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────── PORTALS ─────────── -->
+    <section class="doc" id="portals">
+      <h2>Portals</h2>
+      <p>CME Bank runs two products from this one library. They are not two component sets — they are
+      the same components under two brand themes. Switch with a single attribute:</p>
+
+      <div class="canvas">
+        <div class="canvas__code">&lt;body data-portal="customer"&gt;     &lt;!-- green, Open Sans, roomy, 12px radius --&gt;
+&lt;body data-portal="backoffice"&gt;   &lt;!-- blue, Roboto, dense, 4px radius --&gt;</div>
+      </div>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th></th><th>Customer portal</th><th>Back-office portal</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Brand</strong></td><td class="tok"><span class="tokrow"><span class="tokdot" style="background:#9CC53E"></span>green-500</span></td><td class="tok"><span class="tokrow"><span class="tokdot" style="background:#376EEC"></span>blue-400</span></td></tr>
+            <tr><td><strong>Label on brand</strong></td><td class="tok">green-900 — dark</td><td class="tok">white</td></tr>
+            <tr><td><strong>Typeface</strong></td><td>Open Sans</td><td>Roboto</td></tr>
+            <tr><td><strong>Control height</strong></td><td class="tok">44px — touch-ready</td><td class="tok">36px — dense</td></tr>
+            <tr><td><strong>Radius</strong></td><td class="tok">12px — soft</td><td class="tok">4px — tight</td></tr>
+            <tr><td><strong>Base type</strong></td><td class="tok">14px</td><td class="tok">12px</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub">The same markup, both portals</h3>
+      <div class="portal-compare">
+        <div class="portal-pane" data-portal="customer">
+          <div class="portal-pane__tag">Customer</div>
+          <div class="portal-pane__body">
+            <div style="display:flex;gap:var(--space-3);flex-wrap:wrap;align-items:center">
+              <button class="cme-btn cme-btn--primary">Open account</button>
+              <button class="cme-btn cme-btn--secondary">Cancel</button>
+            </div>
+            <div class="cme-field">
+              <label class="cme-field__label">Email address</label>
+              <input class="cme-input" placeholder="name@example.com">
+            </div>
+            <label class="cme-checkbox"><input type="checkbox" checked><span class="cme-checkbox__box"></span> Paperless statements</label>
+            <label class="cme-switch"><input type="checkbox" checked><span class="cme-switch__track"></span> Two-factor authentication</label>
+            <span class="cme-chip cme-chip--success"><span class="cme-chip__dot"></span> Verified</span>
+          </div>
+        </div>
+        <div class="portal-pane" data-portal="backoffice">
+          <div class="portal-pane__tag">Back-office</div>
+          <div class="portal-pane__body">
+            <div style="display:flex;gap:var(--space-3);flex-wrap:wrap;align-items:center">
+              <button class="cme-btn cme-btn--primary">Approve case</button>
+              <button class="cme-btn cme-btn--secondary">Cancel</button>
+            </div>
+            <div class="cme-field">
+              <label class="cme-field__label">Case reference</label>
+              <input class="cme-input" placeholder="TRX-00000">
+            </div>
+            <label class="cme-checkbox"><input type="checkbox" checked><span class="cme-checkbox__box"></span> Flag for review</label>
+            <label class="cme-switch"><input type="checkbox" checked><span class="cme-switch__track"></span> Auto-assign queue</label>
+            <span class="cme-chip cme-chip--success"><span class="cme-chip__dot"></span> Verified</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">Why the label colour flips between them</span>
+        <p>The customer green is a <strong>light</strong> hue, so its label must be dark — white on it
+        measures 2.56:1 and fails. The back-office blue is <strong>dark</strong> enough to carry white
+        at 4.56:1. <code>--action-primary-fg</code> absorbs that difference, so the button component
+        itself never knows which portal it is in.</p>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Do</h4>
+          <ul>
+            <li>Set <code>data-portal</code> once, on <code>&lt;body&gt;</code>.</li>
+            <li>Use the same component classes in both portals.</li>
+            <li>Add new brand differences to the portal block in <code>tokens.css</code>.</li>
+            <li>Test every new component in both portals before shipping.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Don't fork a component to theme it — that is how one button became five.</li>
+            <li>Don't create <code>.cme-btn--green</code> or <code>--blue</code>. Brand is the portal's job.</li>
+            <li>Don't hardcode a typeface or radius in a component.</li>
+            <li>Don't nest one portal inside another except to demonstrate, as above.</li>
           </ul>
         </div>
       </div>
@@ -1287,6 +1386,14 @@ Rules
     } else {
       box.checked = window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
+    var portalInputs = document.querySelectorAll('input[name="portal"]');
+    var docsRoot = document.getElementById('docsRoot');
+    portalInputs.forEach(function (r) {
+      r.addEventListener('change', function () {
+        if (r.checked) docsRoot.setAttribute('data-portal', r.value);
+      });
+    });
+
     box.addEventListener('change', function () {
       var mode = box.checked ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', mode);
