@@ -36,15 +36,22 @@
       <span class="brand__ver">v1.0.0</span>
     </div>
 
-    <label class="theme-toggle">
-      <input type="checkbox" id="themeSwitch" style="accent-color:var(--selection-bg)">
-      Dark mode
-    </label>
+    <div class="sidebar__controls">
+      <div class="sidebar__wrapper">
+        <div class="theme-switch">
+          <label style="color: var(--text-tertiary);">Theme:</label>
+          <label class="theme-toggle">
+            <input type="checkbox" id="themeSwitch" style="accent-color:var(--selection-bg)">
+            Dark mode
+          </label>
+        </div>
 
-    <div class="portal-switch">
-      <div class="portal-switch__label">Portal</div>
-      <label><input type="radio" name="portal" value="customer" checked> Customer</label>
-      <label><input type="radio" name="portal" value="backoffice"> Back-office</label>
+        <div class="portal-switch">
+          <div class="portal-switch__label">Portal</div>
+          <label><input type="radio" name="portal" value="customer" checked> Customer</label>
+          <label><input type="radio" name="portal" value="backoffice"> Back-office</label>
+        </div>
+      </div>
     </div>
 
     <div style="height:var(--space-4)"></div>

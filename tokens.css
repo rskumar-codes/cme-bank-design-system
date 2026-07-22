@@ -504,7 +504,7 @@
 
 /* Portal brand in dark mode — OS preference */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) [data-portal="customer"],
+  /* :root:not([data-theme="light"]) [data-portal="customer"], */
   :root:not([data-theme="light"])[data-portal="customer"] {
     --action-primary-bg:          var(--green-400);  /* 6.39:1 */
     --action-primary-bg-hover:    var(--green-300);  /* 6.89:1 */
@@ -518,7 +518,7 @@
     --text-link:    var(--green-300);  /* 9.43:1 */
     --border-focus: var(--green-400);  /* 10.78:1 */
   }
-  :root:not([data-theme="light"]) [data-portal="backoffice"],
+  /* :root:not([data-theme="light"]) [data-portal="backoffice"], */
   :root:not([data-theme="light"])[data-portal="backoffice"] {
     --action-primary-bg-disabled: var(--neutral-800);
     --action-primary-fg-disabled: var(--neutral-600);
@@ -529,7 +529,7 @@
 }
 
 /* Portal brand in dark mode — explicit choice, must win over the media query */
-:root[data-theme="dark"] [data-portal="customer"],
+/* :root[data-theme="dark"] [data-portal="customer"], */
 :root[data-theme="dark"][data-portal="customer"] {
   --action-primary-bg:          var(--green-400);
   --action-primary-bg-hover:    var(--green-300);
@@ -543,7 +543,7 @@
   --text-link:    var(--green-300);
   --border-focus: var(--green-400);
 }
-:root[data-theme="dark"] [data-portal="backoffice"],
+/* :root[data-theme="dark"] [data-portal="backoffice"], */
 :root[data-theme="dark"][data-portal="backoffice"] {
   --action-primary-bg-disabled: var(--neutral-800);
   --action-primary-fg-disabled: var(--neutral-600);
