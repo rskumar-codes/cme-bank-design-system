@@ -252,6 +252,42 @@ iOS and Android in sync with the web without hand-maintaining three palettes.
 
 ---
 
+## Copying component code
+
+Every component example on the docs site has a **Copy HTML** button. It serialises the live DOM of the
+example beside it, so the markup you paste is the exact node that renders on the page — there is no
+separately authored snippet that can drift out of sync.
+
+The copied markup assumes two things:
+
+1. `tokens.css` and `components.css` are loaded, and an ancestor carries `data-portal` to pick the brand.
+2. Icons resolve from the sprite — markup with `<use href="#i-…">` needs the icon sprite included once
+   per page.
+
+## Roadmap — framework components
+
+Importable React (or Vue / Web Components) are a deliberate **next** step, not a gap:
+
+| Tier | What ships | Status |
+|---|---|---|
+| 1 · Tokens + CSS | Design tokens, accessible CSS components, copyable markup. Any framework. | **Shipping** |
+| 2 · Framework components | Importable components emitting these classes, bound to Figma via Code Connect. | Roadmap |
+
+Tier 2 is **gated, not skipped**. A design system's value is that components are consumed, not
+re-interpreted — that is what stops one button being built five ways. But shipping components nobody
+owns is worse than shipping none: they fall behind, teams stop trusting them, and they fork. So tier 2
+requires, first:
+
+- a framework the org standardises on — one, not three parallel wrappers;
+- a named owner and maintenance model for the coded components;
+- Code Connect binding each component to its Figma node;
+- the CSS layer staying the source of truth — components wrap it, never re-style.
+
+Design owns tokens, specs, accessibility contracts and the Figma library. Engineering owns the coded
+components. Code Connect binds the two.
+
+---
+
 ## Versioning
 
 | Change | Release | What you owe consumers |

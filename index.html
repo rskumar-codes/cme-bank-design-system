@@ -96,6 +96,7 @@
     <div class="nav-group">
       <div class="nav-group__title">Guidelines</div>
       <ul>
+        <li><a href="#handoff">Developer hand-off</a></li>
         <li><a href="#accessibility">Accessibility</a></li>
         <li><a href="#content">Content style</a></li>
         <li><a href="#contributing">Contributing</a></li>
@@ -1393,7 +1394,7 @@
       back-office, so every visual channel it uses has to earn its place.</p>
 
       <div class="canvas">
-        <div class="canvas__stage canvas__stage--plain" style="padding:0">
+        <div class="canvas__stage canvas__stage--plain" style="padding:var(--space-8) 0 0">
           <div class="cme-table-wrap" style="border:0;border-radius:0;width:100%">
             <table class="cme-table">
               <caption>Recent transactions — March 2026</caption>
@@ -1471,6 +1472,76 @@
             <li>Don't paginate below about 50 rows — scrolling is cheaper for the reader.</li>
           </ul>
         </div>
+      </div>
+    </section>
+
+
+    <!-- ═════════════ DEVELOPER HAND-OFF ═════════════ -->
+    <section class="doc" id="handoff">
+      <h2>Developer hand-off</h2>
+      <p>Every component example on this site carries a <strong>Copy HTML</strong> button. It copies the
+      exact markup that renders the example beside it — the button reads the live DOM, so the code you
+      paste and the component you see are the same thing. They cannot drift, because there is no second
+      copy to fall out of sync.</p>
+
+      <div class="note">
+        <span class="note__label">Two things the copied markup assumes</span>
+        <p><strong>The stylesheets are loaded.</strong> Paste needs <code>tokens.css</code> and
+        <code>components.css</code> on the page, and a <code>data-portal</code> on an ancestor to pick
+        the brand. <strong>Icons come from the sprite.</strong> Markup with <code>&lt;use href="#i-…"&gt;</code>
+        references the icon sprite — include it once per page (see <a href="#icons">Iconography</a>). The
+        copied code is complete HTML, not a framework component.</p>
+      </div>
+
+      <h3 class="sub">Roadmap — framework components</h3>
+      <p>Importable React components are a deliberate <em>next</em> step, not a gap. Here is the reasoning,
+      so the decision is on the record rather than implied.</p>
+
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>Tier</th><th>What ships</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1 · Tokens + CSS</strong></td><td>Design tokens, accessible CSS components, copyable markup. Works in any framework.</td><td class="tok">Shipping now</td></tr>
+            <tr><td><strong>2 · Framework components</strong></td><td>Importable React (or Vue / Web Components) that emit these same classes, bound to Figma with Code Connect.</td><td class="tok">Roadmap</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="note__label">Why tier 2 is gated, not skipped</span>
+        <p>A design system's value is that components are <em>consumed, not re-interpreted</em> — that is
+        what stops a button being built five different ways. Importable components are the structural cure
+        for that. But shipping components <strong>nobody owns</strong> is worse than shipping none: they
+        fall behind, teams stop trusting them, and they fork — recreating the drift the system exists to
+        remove. So tier 2 is gated on two decisions, both org-level rather than technical:</p>
+      </div>
+
+      <div class="guidance">
+        <div class="do">
+          <h4>Prerequisites for tier 2</h4>
+          <ul>
+            <li>A framework the org standardises on — one, not three parallel wrappers.</li>
+            <li>A named owner and a maintenance model for the coded components.</li>
+            <li>Code Connect binding each component to its Figma node, so design and code stay honest.</li>
+            <li>The CSS layer stays the source of truth; components wrap it, never re-style.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>What tier 2 must not become</h4>
+          <ul>
+            <li>A second set of visual decisions that can disagree with the CSS.</li>
+            <li>Hand-authored snippets that drift from the live component.</li>
+            <li>Components maintained by whoever last touched them — that is how libraries rot.</li>
+            <li>A per-team fork because the shared one fell behind.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="note__label">Whose job is this</span>
+        <p>Design owns the tokens, specs, accessibility contracts and the Figma library. Engineering owns
+        the coded components. Code Connect binds the two. The design system's role is to specify a
+        component tightly enough that it is unambiguous — not to hand-author the framework layer.</p>
       </div>
     </section>
 
@@ -1645,5 +1716,113 @@ Rules
   })();
 </script>
 
+
+<script>
+  // Copy-to-code. The button serialises the live DOM of the example beside it,
+  // so the copied markup is provably the same node that renders on the page —
+  // there is no separately authored snippet that can drift out of sync.
+  (function () {
+    var SKIP   = /(matrix__label|matrix__head|canvas__code|canvas__toolbar|copy-btn)/;
+    var UNWRAP = /(^|\s)(matrix|matrix__row)(\s|$)/;
+    var VOID   = /^(input|img|br|hr|source|meta|link)$/;
+
+    function keepClass(v) {
+      return v.split(/\s+/).filter(function (c) {
+        return c && !/^is-(hover|pressed|focus)$/.test(c);  // forced demo states
+      }).join(' ');
+    }
+    function isUnwrap(el) {
+      var c = el.getAttribute('class') || '';
+      if (el.tagName === 'DIV' && !el.getAttribute('class')) return true;   // layout wrapper
+      if (UNWRAP.test(c)) return true;
+      if (c.indexOf('canvas__stage') >= 0) return true;
+      return false;
+    }
+    function children(node, indent) {
+      var out = [];
+      node.childNodes.forEach(function (ch) {
+        var s = node2str(ch, indent);
+        if (s) out.push(s);
+      });
+      return out;
+    }
+    function node2str(node, indent) {
+      if (node.nodeType === 3) {
+        var t = node.textContent.replace(/\s+/g, ' ').trim();
+        return t ? indent + t : '';
+      }
+      if (node.nodeType !== 1) return '';
+      var cls = node.getAttribute('class') || '';
+      if (SKIP.test(cls)) return '';
+      if (isUnwrap(node)) return children(node, indent).join('\n');
+
+      var tag = node.tagName.toLowerCase();
+      var attrs = [];
+      for (var i = 0; i < node.attributes.length; i++) {
+        var a = node.attributes[i];
+        if (a.name === 'data-copy') continue;
+        if (a.name === 'class') { var c = keepClass(a.value); if (c) attrs.push('class="' + c + '"'); continue; }
+        attrs.push(a.value === '' ? a.name : a.name + '="' + a.value + '"');
+      }
+      var open = '<' + tag + (attrs.length ? ' ' + attrs.join(' ') : '') + '>';
+      if (VOID.test(tag)) return indent + open;
+
+      var kids = children(node, indent + '  ');
+      if (kids.length === 0) return indent + open + '</' + tag + '>';
+      if (node.childNodes.length === 1 && node.childNodes[0].nodeType === 3) {
+        var only = node.childNodes[0].textContent.replace(/\s+/g, ' ').trim();
+        return indent + open + only + '</' + tag + '>';
+      }
+      return indent + open + '\n' + kids.join('\n') + '\n' + indent + '</' + tag + '>';
+    }
+    function markup(canvas) {
+      var stage = canvas.querySelector('.canvas__stage');
+      return children(stage, '').join('\n');
+    }
+    function flash(btn) {
+      var label = btn.getAttribute('data-label');
+      btn.textContent = 'Copied';
+      btn.classList.add('is-copied');
+      setTimeout(function () { btn.textContent = label; btn.classList.remove('is-copied'); }, 1500);
+    }
+    function copy(text, btn) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { flash(btn); }).catch(function () { fallback(text, btn); });
+      } else { fallback(text, btn); }
+    }
+    function fallback(text, btn) {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      ta.remove(); flash(btn);
+    }
+
+    document.querySelectorAll('section.doc').forEach(function (sec) {
+      var canvases = [].slice.call(sec.querySelectorAll('.canvas')).filter(function (c) {
+        var st = c.querySelector('.canvas__stage');
+        return st && st.querySelector('[class*="cme-"]');
+      });
+      if (!canvases.length) return;
+      var hero = canvases[0];                      // one copy target per component
+
+      var bar = document.createElement('div');
+      bar.className = 'canvas__toolbar';
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy-btn';
+      btn.setAttribute('data-label', 'Copy HTML');
+      btn.textContent = 'Copy HTML';
+      bar.appendChild(btn);
+      hero.appendChild(bar);
+
+      // keep the visible code hint identical to what will be copied
+      var block = hero.querySelector('.canvas__code');
+      if (block) block.textContent = markup(hero);
+
+      btn.addEventListener('click', function () { copy(markup(hero), btn); });
+    });
+  })();
+</script>
 </body>
 </html>

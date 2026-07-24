@@ -290,3 +290,21 @@ footer.docs-footer {
   display: flex; flex-direction: column; gap: var(--space-4);
   align-items: flex-start;
 }
+
+
+/* ── Copy-to-code ────────────────────────────────────────────────────── */
+.canvas { position: relative; }
+.canvas__toolbar { position: absolute; top: var(--space-2); right: var(--space-2); z-index: 3; }
+.copy-btn {
+  font-family: var(--font-mono); font-size: var(--size-11);
+  display: inline-flex; align-items: center; gap: var(--space-1);
+  padding: 4px 10px;
+  border: var(--border-width-thin) solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised); color: var(--text-secondary);
+  cursor: pointer;
+}
+.copy-btn:hover { color: var(--text-primary); border-color: var(--border-strong); }
+.copy-btn:focus-visible { outline: var(--border-width-focus) solid var(--border-focus); outline-offset: 2px; }
+.copy-btn.is-copied { color: var(--feedback-success-fg); border-color: var(--feedback-success-border); }
+.copy-btn svg { width: 13px; height: 13px; }
