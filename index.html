@@ -39,17 +39,24 @@
     <div class="sidebar__controls">
       <div class="sidebar__wrapper">
         <div class="theme-switch">
-          <label style="color: var(--text-tertiary);">Theme:</label>
-          <label class="theme-toggle">
+          <label class="section-title">Theme</label>
+          <span class="theme-switch__button">
             <input type="checkbox" id="themeSwitch" style="accent-color:var(--selection-bg)">
-            Dark mode
-          </label>
+            <label class="theme-toggle" for="themeSwitch"></label>
+          </span>
         </div>
 
         <div class="portal-switch">
-          <div class="portal-switch__label">Portal</div>
-          <label><input type="radio" name="portal" value="customer" checked> Customer</label>
-          <label><input type="radio" name="portal" value="backoffice"> Back-office</label>
+          <label class="section-title">Portal</label>
+
+          <span class="portal-switch__button">
+            <input type="radio" name="portal" value="customer" checked id="customer">
+            <label class="portal-switch__label" for="customer">Customer</label>
+          </span>
+          <span class="portal-switch__button">
+            <input type="radio" name="portal" value="backoffice" id="backoffice">
+            <label class="portal-switch__label" for="backoffice">Back-office</label>
+          </span>
         </div>
       </div>
     </div>
