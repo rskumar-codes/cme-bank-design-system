@@ -492,3 +492,11 @@ footer.docs-footer {
 .icon-tile__name { font-size: var(--size-11); color: var(--text-secondary); line-height: 1.3; }
 .icon-tile.is-copied .icon-tile__name { color: var(--feedback-success-fg); }
 .icon-empty { color: var(--text-tertiary); font-size: var(--size-14); }
+
+/* Lucide export name shown on each catalogue tile */
+.icon-tile__ms {
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--text-tertiary); line-height: 1.2;
+  word-break: break-word;
+}
+.icon-tile.is-copied .icon-tile__ms { color: var(--feedback-success-fg); }

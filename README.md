@@ -264,6 +264,23 @@ The copied markup assumes two things:
 2. Icons resolve from the sprite — markup with `<use href="#i-…">` needs the icon sprite included once
    per page.
 
+## Icons — Google Material Symbols
+
+The system standardises on **Google Material Symbols** (Outlined, weight 400, fill 0), because it exists
+in both tools: designers pull it from the *Material Symbols* Figma plugin, developers install it from a
+package, and it is the same glyph in each.
+
+- **Docs** render the real Material glyphs from a self-hosted SVG sprite — offline, no CDN.
+- **Apps** install `material-symbols` (self-hosted web font) or `@mui/icons-material` (React), and
+  reference each icon by its Material name (`delete`, `account_balance`, `swap_horiz`…). Import per
+  icon so bundles carry only what a screen renders.
+- **Never** link the Google Fonts CDN in an app that must work offline, and always set
+  `aria-hidden="true"` on the icon glyph — the web font renders from ligature text, which a screen
+  reader would otherwise read aloud. The meaning belongs on the control's `aria-label`.
+
+The docs Iconography page lists every icon with its Material name and a click-to-copy; the full set is
+at [fonts.google.com/icons](https://fonts.google.com/icons).
+
 ## Roadmap — framework components
 
 Importable React (or Vue / Web Components) are a deliberate **next** step, not a gap:
