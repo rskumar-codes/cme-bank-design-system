@@ -450,3 +450,45 @@ footer.docs-footer {
 .copy-btn:focus-visible { outline: var(--border-width-focus) solid var(--border-focus); outline-offset: 2px; }
 .copy-btn.is-copied { color: var(--feedback-success-fg); border-color: var(--feedback-success-border); }
 .copy-btn svg { width: 13px; height: 13px; }
+
+/* ── Icon catalogue ──────────────────────────────────────────────────── */
+.icon-search {
+  display: flex; align-items: center; gap: var(--space-2);
+  border: var(--border-width-thin) solid var(--field-border);
+  border-radius: var(--radius-md);
+  padding: 0 var(--space-3); height: var(--control-md);
+  background: var(--field-bg); margin-bottom: var(--space-5); max-width: 420px;
+}
+.icon-search:focus-within { border-color: var(--border-focus); }
+.icon-search svg { width: var(--icon-sm); height: var(--icon-sm); color: var(--text-tertiary); flex: none; }
+.icon-search input {
+  border: 0; background: transparent; outline: none;
+  font-family: inherit; font-size: var(--size-14); color: var(--text-primary);
+  width: 100%; height: 100%;
+}
+.icon-group { margin-bottom: var(--space-6); }
+.icon-group__title {
+  font-family: var(--font-mono); font-size: var(--size-11);
+  letter-spacing: var(--track-loose); text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: var(--space-3);
+}
+.icon-grid {
+  display: grid; gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+}
+.icon-tile {
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
+  padding: var(--space-4) var(--space-2);
+  border: var(--border-width-thin) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised); color: var(--text-primary);
+  font: inherit; cursor: pointer; text-align: center;
+  transition: border-color .12s ease, background-color .12s ease;
+}
+.icon-tile:hover { border-color: var(--border-strong); background: var(--surface-sunken); }
+.icon-tile:focus-visible { outline: var(--border-width-focus) solid var(--border-focus); outline-offset: 2px; }
+.icon-tile.is-copied { border-color: var(--feedback-success-border); color: var(--feedback-success-fg); }
+.icon-tile__svg { width: var(--icon-lg); height: var(--icon-lg); }
+.icon-tile__name { font-size: var(--size-11); color: var(--text-secondary); line-height: 1.3; }
+.icon-tile.is-copied .icon-tile__name { color: var(--feedback-success-fg); }
+.icon-empty { color: var(--text-tertiary); font-size: var(--size-14); }
